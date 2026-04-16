@@ -3,86 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Никита — Founder & Builder</title>
+  <title>Никита Язвинский — Founder & Builder</title>
+  <meta name="description" content="Серийный основатель. 6 стартапов. 5+ лет в предпринимательстве. Сейчас строю Zuply — IT-платформу для производства в Китае." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&family=Unbounded:wght@300;400;700;900&family=Neue+Montreal:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800;900&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #000000;
+      --bg: #050505;
       --bg2: #0a0a0a;
-      --bg3: #111111;
-      --surface: #161616;
-      --surface2: #1c1c1c;
+      --bg3: #0f0f0f;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --surface3: #202020;
       --border: rgba(255,255,255,0.08);
-      --border-bright: rgba(255,255,255,0.15);
+      --border-bright: rgba(255,255,255,0.16);
+      --border-accent: rgba(0,113,227,0.35);
       --text: #f5f5f7;
+      --text-soft: rgba(245,245,247,0.75);
       --text-muted: rgba(245,245,247,0.5);
       --text-dim: rgba(245,245,247,0.3);
       --accent: #0071e3;
+      --accent-hover: #0077ed;
       --accent-soft: rgba(0,113,227,0.15);
-      --accent2: #30d158;
-      --accent3: #ff375f;
-      --accent4: #bf5af2;
-      --accent5: #ff9f0a;
-      --grad1: linear-gradient(135deg, #0071e3 0%, #bf5af2 100%);
-      --grad2: linear-gradient(135deg, #30d158 0%, #0071e3 100%);
-      --grad3: linear-gradient(135deg, #ff375f 0%, #ff9f0a 100%);
+      --accent-green: #30d158;
+      --accent-red: #ff375f;
+      --accent-purple: #bf5af2;
+      --accent-orange: #ff9f0a;
+      --accent-cyan: #5ac8fa;
+      --grad-primary: linear-gradient(135deg, #0071e3 0%, #bf5af2 100%);
+      --grad-success: linear-gradient(135deg, #30d158 0%, #0071e3 100%);
+      --grad-warm: linear-gradient(135deg, #ff375f 0%, #ff9f0a 100%);
+      --grad-cold: linear-gradient(135deg, #5ac8fa 0%, #bf5af2 100%);
+      --grad-fire: linear-gradient(135deg, #ff9f0a 0%, #ff375f 50%, #bf5af2 100%);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    ::selection { background: var(--accent); color: #fff; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Outfit', -apple-system, sans-serif;
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
       overflow-x: hidden;
-      cursor: none;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Custom cursor */
-    .cursor {
-      width: 10px; height: 10px;
-      background: #fff;
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
+    img { max-width: 100%; display: block; }
+
+    /* ============ CUSTOM CURSOR ============ */
+    .cursor, .cursor-follower {
       pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
       z-index: 9999;
-      transition: transform 0.15s ease;
+      border-radius: 50%;
+      will-change: transform;
+    }
+    .cursor {
+      width: 8px; height: 8px;
+      background: #fff;
       mix-blend-mode: difference;
+      transition: transform 0.12s ease;
     }
     .cursor-follower {
       width: 36px; height: 36px;
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none;
+      border: 1px solid rgba(255,255,255,0.35);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
       z-index: 9998;
-      transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), width 0.3s, height 0.3s, border-color 0.3s;
     }
-    .cursor-follower.hover { width: 56px; height: 56px; border-color: rgba(0,113,227,0.7); }
+    .cursor-follower.hover {
+      width: 64px; height: 64px;
+      border-color: rgba(0,113,227,0.8);
+      background: rgba(0,113,227,0.08);
+    }
+    @media (hover: none), (max-width: 768px) {
+      .cursor, .cursor-follower { display: none; }
+      body { cursor: auto; }
+    }
+    @media (hover: hover) {
+      body, a, button { cursor: none; }
+    }
 
-    /* NAV */
+    /* ============ NAV ============ */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 0 48px;
-      height: 56px;
+      height: 64px;
       display: flex; align-items: center; justify-content: space-between;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(5,5,5,0.72);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
       border-bottom: 1px solid var(--border);
+      transition: padding 0.3s ease;
     }
     .nav-logo {
       font-family: 'Unbounded', sans-serif;
       font-weight: 700;
       font-size: 15px;
       letter-spacing: -0.02em;
-      background: var(--grad1);
+      background: var(--grad-primary);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent-green);
+      animation: pulse 2s infinite;
     }
     .nav-links {
       display: flex; gap: 36px; list-style: none;
@@ -94,314 +129,582 @@
       font-weight: 400;
       letter-spacing: 0.01em;
       transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 100%;
+      bottom: -6px; height: 1px;
+      background: var(--grad-primary);
+      transition: right 0.3s ease;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { right: 0; }
     .nav-cta {
-      background: var(--accent);
-      color: #fff;
+      background: var(--text);
+      color: #000;
       border: none;
-      border-radius: 20px;
-      padding: 8px 20px;
+      border-radius: 980px;
+      padding: 10px 22px;
       font-size: 13px;
       font-family: 'Outfit', sans-serif;
       font-weight: 500;
-      cursor: none;
-      transition: background 0.2s, transform 0.15s;
+      transition: all 0.2s;
+      text-decoration: none;
     }
-    .nav-cta:hover { background: #0077ed; transform: scale(1.03); }
+    .nav-cta:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.15);
+    }
 
-    /* HERO */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; height: 56px; }
+      .nav-links { display: none; }
+    }
+
+    /* ============ HERO ============ */
     .hero {
       min-height: 100vh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center;
-      padding: 120px 24px 80px;
+      padding: 140px 24px 100px;
       position: relative;
       overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0,113,227,0.18) 0%, transparent 70%),
-                  radial-gradient(ellipse 50% 50% at 80% 80%, rgba(191,90,242,0.12) 0%, transparent 60%),
-                  radial-gradient(ellipse 40% 40% at 20% 80%, rgba(48,209,88,0.08) 0%, transparent 60%);
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 30%, rgba(0,113,227,0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 85% 75%, rgba(191,90,242,0.16) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 15% 70%, rgba(48,209,88,0.1) 0%, transparent 60%);
+      animation: heroBreath 12s ease-in-out infinite;
     }
-    .hero-noise {
-      position: absolute; inset: 0;
-      opacity: 0.03;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 200px;
+    @keyframes heroBreath {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.05); }
     }
     .hero-grid {
       position: absolute; inset: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, black 0%, transparent 95%);
+      -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, black 0%, transparent 95%);
     }
+    .hero-noise {
+      position: absolute; inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px;
+      pointer-events: none;
+    }
+    .floating-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      animation: floatOrb 18s ease-in-out infinite;
+    }
+    .orb-1 { width: 380px; height: 380px; top: 10%; left: -10%; background: #0071e3; }
+    .orb-2 { width: 280px; height: 280px; bottom: 15%; right: -5%; background: #bf5af2; animation-delay: -6s; }
+    .orb-3 { width: 220px; height: 220px; top: 40%; right: 10%; background: #30d158; animation-delay: -12s; }
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(40px, -30px) scale(1.1); }
+      66% { transform: translate(-30px, 20px) scale(0.95); }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+    }
+
     .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0,113,227,0.12);
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(0,113,227,0.1);
       border: 1px solid rgba(0,113,227,0.3);
       border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 12px;
-      font-weight: 500;
-      color: #5ac8fa;
-      letter-spacing: 0.08em;
+      padding: 8px 18px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 32px;
-      position: relative;
-      animation: fadeUp 0.8s ease both;
+      margin-bottom: 36px;
+      animation: fadeUp 1s ease both;
+      backdrop-filter: blur(8px);
     }
-    .hero-tag::before {
-      content: '';
+    .hero-tag .dot {
       width: 6px; height: 6px;
-      background: #30d158;
+      background: var(--accent-green);
       border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-green);
       animation: pulse 2s infinite;
     }
     @keyframes pulse {
       0%,100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.4); }
+      50% { opacity: 0.4; transform: scale(1.6); }
     }
+
     .hero h1 {
       font-family: 'Unbounded', sans-serif;
-      font-size: clamp(52px, 9vw, 110px);
+      font-size: clamp(52px, 10vw, 128px);
       font-weight: 900;
-      line-height: 0.92;
-      letter-spacing: -0.04em;
-      margin-bottom: 8px;
-      position: relative;
-      animation: fadeUp 0.8s 0.1s ease both;
+      line-height: 0.88;
+      letter-spacing: -0.045em;
+      margin-bottom: 24px;
+      animation: fadeUp 1s 0.1s ease both;
     }
+    .hero h1 .row { display: block; }
     .hero h1 .name-grad {
-      background: linear-gradient(135deg, #f5f5f7 0%, #a1a1a6 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #a1a1a6 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .hero h1 .name-accent {
-      background: var(--grad1);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      background: var(--grad-primary);
       -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-roles {
+      display: inline-flex; align-items: center; gap: 14px;
+      flex-wrap: wrap; justify-content: center;
+      margin-bottom: 20px;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+    .hero-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: rgba(255,255,255,0.02);
+    }
+    .hero-role-sep {
+      color: var(--text-dim);
+      font-size: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 300;
+      color: var(--text-soft);
+      letter-spacing: -0.01em;
+      margin: 28px auto 48px;
+      max-width: 720px;
+      line-height: 1.55;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+    .hero-subtitle strong {
+      color: var(--text);
+      font-weight: 500;
+      background: linear-gradient(135deg, #5ac8fa 0%, #bf5af2 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .hero-subtitle {
-      font-size: clamp(18px, 2.5vw, 26px);
-      font-weight: 300;
-      color: var(--text-muted);
-      letter-spacing: -0.01em;
-      margin: 24px 0 48px;
-      max-width: 620px;
-      line-height: 1.5;
-      animation: fadeUp 0.8s 0.2s ease both;
-    }
-    .hero-subtitle strong { color: var(--text); font-weight: 500; }
+
     .hero-actions {
       display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
-      animation: fadeUp 0.8s 0.3s ease both;
+      animation: fadeUp 1s 0.4s ease both;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 980px;
-      padding: 16px 36px;
-      font-size: 17px;
+
+    .btn-primary, .btn-secondary {
+      padding: 16px 32px;
+      font-size: 15px;
       font-family: 'Outfit', sans-serif;
       font-weight: 500;
-      cursor: none;
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      border-radius: 980px;
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      border: none;
+      position: relative;
+      overflow: hidden;
     }
+    .btn-primary {
+      background: var(--text);
+      color: #000;
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--grad-primary);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-primary span { position: relative; z-index: 1; }
     .btn-primary:hover {
-      background: #0077ed;
-      transform: scale(1.03);
-      box-shadow: 0 8px 40px rgba(0,113,227,0.4);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 40px rgba(0,113,227,0.4);
+      color: #fff;
     }
+    .btn-primary:hover::before { opacity: 1; }
     .btn-secondary {
-      background: transparent;
+      background: rgba(255,255,255,0.04);
       color: var(--text);
       border: 1px solid var(--border-bright);
-      border-radius: 980px;
-      padding: 16px 36px;
-      font-size: 17px;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 400;
-      cursor: none;
-      transition: background 0.2s, transform 0.15s, border-color 0.2s;
-      text-decoration: none;
-      display: inline-block;
+      backdrop-filter: blur(8px);
     }
     .btn-secondary:hover {
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(255,255,255,0.3);
-      transform: scale(1.03);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.35);
+      transform: translateY(-2px) scale(1.02);
     }
-    .hero-scroll {
-      position: absolute; bottom: 40px;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
+
+    /* Profile photo slot in hero */
+    .hero-profile-slot {
+      display: flex; flex-direction: column; align-items: center;
+      margin-bottom: 32px;
+      animation: fadeUp 1s ease both;
+    }
+    .profile-photo {
+      width: 112px; height: 112px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--border-bright);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,113,227,0.25), 0 0 0 6px rgba(0,113,227,0.08);
+      transition: transform 0.3s ease;
+    }
+    .profile-photo:hover { transform: scale(1.05); }
+    .profile-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .profile-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 40px;
+      font-weight: 900;
+      background: var(--grad-primary);
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    .profile-hint {
+      font-size: 10px;
+      font-family: 'Space Mono', monospace;
       color: var(--text-dim);
-      font-size: 11px;
+      margin-top: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      animation: fadeUp 1s 0.6s ease both;
+    }
+
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      color: var(--text-dim);
+      font-size: 10px;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      animation: fadeUp 1.2s 0.8s ease both;
+      z-index: 2;
     }
     .scroll-line {
       width: 1px; height: 48px;
-      background: linear-gradient(to bottom, var(--text-dim), transparent);
-      animation: scrollLine 2s ease infinite;
+      background: linear-gradient(to bottom, transparent, var(--text-muted), transparent);
+      animation: scrollLine 2.4s ease-in-out infinite;
     }
     @keyframes scrollLine {
       0% { transform: scaleY(0); transform-origin: top; }
-      50% { transform: scaleY(1); transform-origin: top; }
-      51% { transform: scaleY(1); transform-origin: bottom; }
+      48% { transform: scaleY(1); transform-origin: top; }
+      52% { transform: scaleY(1); transform-origin: bottom; }
       100% { transform: scaleY(0); transform-origin: bottom; }
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
+      from { opacity: 0; transform: translateY(32px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* STATS */
+    /* ============ MARQUEE ============ */
+    .marquee {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 28px 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .marquee::before, .marquee::after {
+      content: '';
+      position: absolute; top: 0; bottom: 0;
+      width: 160px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .marquee::before { left: 0; background: linear-gradient(to right, var(--bg2), transparent); }
+    .marquee::after { right: 0; background: linear-gradient(to left, var(--bg2), transparent); }
+    .marquee-track {
+      display: flex;
+      gap: 72px;
+      animation: marquee 40s linear infinite;
+      white-space: nowrap;
+      width: max-content;
+    }
+    .marquee-item {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: -0.01em;
+      display: flex; align-items: center; gap: 72px;
+    }
+    .marquee-item .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .marquee-item strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ============ STATS ============ */
     .stats-bar {
-      padding: 0 24px;
-      margin: 0 auto 120px;
-      max-width: 1100px;
+      padding: 100px 24px 0;
+      max-width: 1180px;
+      margin: 0 auto;
     }
     .stats-inner {
-      background: var(--surface);
+      background: linear-gradient(135deg, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.9) 100%);
       border: 1px solid var(--border);
-      border-radius: 24px;
+      border-radius: 28px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       overflow: hidden;
+      backdrop-filter: blur(12px);
     }
     .stat-item {
-      padding: 36px 32px;
+      padding: 44px 32px;
       border-right: 1px solid var(--border);
       position: relative;
       overflow: hidden;
+      transition: background 0.3s ease;
     }
     .stat-item:last-child { border-right: none; }
     .stat-item::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0;
       height: 2px;
-      background: var(--grad1);
+      background: var(--grad-primary);
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
     .stat-item:hover::before { transform: scaleX(1); }
+    .stat-item:hover { background: rgba(255,255,255,0.02); }
     .stat-number {
       font-family: 'Unbounded', sans-serif;
-      font-size: 40px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      background: var(--grad1);
+      font-size: clamp(36px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: var(--grad-primary);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       display: block;
       margin-bottom: 8px;
+      line-height: 1;
     }
     .stat-label {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-muted);
       font-weight: 400;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 768px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
     }
 
-    /* SECTION STYLES */
-    section {
-      padding: 120px 24px;
-    }
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    /* ============ SECTION ============ */
+    section { padding: 140px 24px; position: relative; }
+    .section-inner { max-width: 1180px; margin: 0 auto; }
+    .section-header { margin-bottom: 72px; max-width: 720px; }
     .section-eyebrow {
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-      display: flex; align-items: center; gap: 10px;
+      color: var(--accent-cyan);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 14px;
     }
-    .section-eyebrow::after {
+    .section-eyebrow::before {
       content: '';
-      flex: 1;
-      max-width: 48px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.5;
+      width: 28px; height: 1px;
+      background: var(--accent-cyan);
     }
     .section-title {
       font-family: 'Unbounded', sans-serif;
-      font-size: clamp(32px, 5vw, 56px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-      margin-bottom: 20px;
+      font-size: clamp(36px, 5.5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.02;
+      margin-bottom: 24px;
+    }
+    .section-title em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .section-desc {
-      font-size: 18px;
-      color: var(--text-muted);
+      font-size: 19px;
+      color: var(--text-soft);
       font-weight: 300;
       line-height: 1.65;
-      max-width: 640px;
-      margin-bottom: 64px;
+      max-width: 680px;
     }
 
-    /* ABOUT */
+    /* ============ ABOUT ============ */
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: center;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .about-left {
+      display: flex; flex-direction: column; gap: 24px;
     }
     .about-card {
-      background: var(--surface);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(20,20,20,0.5) 100%);
       border: 1px solid var(--border);
       border-radius: 28px;
-      padding: 48px;
+      padding: 44px 44px;
       position: relative;
       overflow: hidden;
     }
     .about-card::before {
       content: '';
       position: absolute;
-      top: -80px; right: -80px;
-      width: 240px; height: 240px;
+      top: -100px; right: -100px;
+      width: 260px; height: 260px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,113,227,0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,113,227,0.18) 0%, transparent 70%);
+    }
+    .about-quote {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 26px;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 28px;
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--accent);
     }
     .about-card p {
       font-size: 16px;
-      line-height: 1.75;
-      color: rgba(245,245,247,0.75);
+      line-height: 1.8;
+      color: var(--text-soft);
       font-weight: 300;
     }
-    .about-card p + p { margin-top: 16px; }
-    .about-card strong { color: var(--text); font-weight: 500; }
-    .about-visual {
-      display: flex; flex-direction: column; gap: 20px;
+    .about-card p + p { margin-top: 18px; }
+    .about-card strong {
+      color: var(--text);
+      font-weight: 500;
+      background: linear-gradient(90deg, rgba(0,113,227,0.2), rgba(191,90,242,0.2));
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+    .photo-slot-big {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      aspect-ratio: 4/5;
+      position: relative;
+      overflow: hidden;
+    }
+    .photo-slot-big::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(0,113,227,0.18), transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(191,90,242,0.16), transparent 60%);
+    }
+    .photo-slot-big .photo-inner {
+      position: absolute; inset: 16px;
+      border: 1px dashed rgba(255,255,255,0.15);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px;
+      color: var(--text-muted);
+    }
+    .photo-slot-big img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 28px;
+      z-index: 2;
+    }
+    .photo-icon {
+      font-size: 32px;
+    }
+    .photo-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .photo-slot-big .photo-meta {
+      position: absolute; bottom: 24px; left: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      z-index: 3;
+    }
+
+    .about-pills {
+      display: flex; flex-direction: column; gap: 12px;
     }
     .about-pill {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px 24px;
-      display: flex; align-items: center; gap: 16px;
-      transition: border-color 0.2s, transform 0.2s;
+      border-radius: 18px;
+      padding: 22px 26px;
+      display: flex; align-items: center; gap: 18px;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .about-pill:hover { border-color: var(--border-bright); transform: translateX(4px); }
+    .about-pill:hover {
+      border-color: var(--border-bright);
+      transform: translateX(6px);
+      background: var(--surface2);
+    }
     .pill-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
+      width: 48px; height: 48px;
+      border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
       font-size: 22px;
       flex-shrink: 0;
@@ -409,137 +712,297 @@
     .pill-text strong {
       display: block;
       font-size: 15px;
-      font-weight: 500;
-      margin-bottom: 3px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
     }
     .pill-text span {
       font-size: 13px;
       color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.5;
     }
 
-    /* STARTUPS TIMELINE */
-    .startups-section { background: var(--bg2); }
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============ PHILOSOPHY ============ */
+    .philosophy-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .philo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px 32px;
+      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .philo-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-bright);
+    }
+    .philo-number {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0.25;
+      margin-bottom: 16px;
+    }
+    .philo-card:nth-child(2) .philo-number { background: var(--grad-success); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .philo-card:nth-child(3) .philo-number { background: var(--grad-warm); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .philo-card h3 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .philo-card p {
+      font-size: 15px;
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    @media (max-width: 768px) {
+      .philosophy-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============ TIMELINE — STARTUPS ============ */
+    .startups-section {
+      background: var(--bg);
+    }
     .timeline {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+      padding-left: 0;
     }
     .timeline::before {
       content: '';
       position: absolute;
-      left: 28px;
-      top: 0; bottom: 0;
+      left: 32px;
+      top: 20px; bottom: 20px;
       width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--border) 10%, var(--border) 90%, transparent);
+      background: linear-gradient(to bottom,
+        transparent,
+        rgba(0,113,227,0.4) 8%,
+        rgba(191,90,242,0.4) 40%,
+        rgba(255,55,95,0.4) 70%,
+        rgba(48,209,88,0.5) 92%,
+        transparent);
     }
     .timeline-item {
       display: grid;
-      grid-template-columns: 56px 1fr;
+      grid-template-columns: 64px 1fr;
       gap: 32px;
       padding-bottom: 48px;
       position: relative;
     }
     .timeline-item:last-child { padding-bottom: 0; }
     .timeline-dot {
-      width: 56px; height: 56px;
+      width: 64px; height: 64px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
+      font-size: 26px;
       flex-shrink: 0;
-      border: 2px solid var(--border);
       background: var(--surface);
+      border: 2px solid var(--border);
       position: relative;
       z-index: 1;
-      transition: transform 0.3s, border-color 0.3s;
+      transition: all 0.35s ease;
     }
     .timeline-item:hover .timeline-dot {
-      transform: scale(1.1);
+      transform: scale(1.08);
+      box-shadow: 0 0 0 8px rgba(0,113,227,0.08);
     }
     .timeline-content {
-      background: var(--surface);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(20,20,20,0.6) 100%);
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 36px 40px;
-      transition: border-color 0.3s, transform 0.3s;
-      cursor: default;
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
     .timeline-content:hover {
       border-color: var(--border-bright);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
+
+    .startup-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 20px; margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .startup-header-left { flex: 1; min-width: 240px; }
     .timeline-meta {
       display: flex; align-items: center; gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       flex-wrap: wrap;
     }
     .startup-number {
       font-family: 'Space Mono', monospace;
       font-size: 11px;
       color: var(--text-dim);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
     .startup-badge {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 5px 11px;
       border-radius: 100px;
+      display: inline-flex; align-items: center; gap: 6px;
     }
-    .badge-failed { background: rgba(255,55,95,0.12); color: #ff375f; }
-    .badge-missed { background: rgba(255,159,10,0.12); color: #ff9f0a; }
-    .badge-paused { background: rgba(100,100,120,0.2); color: rgba(245,245,247,0.5); }
-    .badge-live { background: rgba(48,209,88,0.12); color: #30d158; }
+    .startup-badge::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      display: inline-block;
+    }
+    .badge-failed { background: rgba(255,55,95,0.1); color: #ff375f; }
+    .badge-failed::before { background: #ff375f; }
+    .badge-missed { background: rgba(255,159,10,0.1); color: #ff9f0a; }
+    .badge-missed::before { background: #ff9f0a; }
+    .badge-paused { background: rgba(120,120,128,0.2); color: rgba(245,245,247,0.55); }
+    .badge-paused::before { background: rgba(245,245,247,0.55); }
+    .badge-live { background: rgba(48,209,88,0.1); color: #30d158; }
+    .badge-live::before { background: #30d158; animation: pulse 2s infinite; }
+
     .timeline-content h3 {
       font-family: 'Unbounded', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+      line-height: 1.1;
     }
-    .timeline-content .tagline {
+    .tagline {
       font-size: 14px;
-      color: var(--accent);
+      color: var(--accent-cyan);
       font-weight: 500;
-      margin-bottom: 16px;
-      letter-spacing: 0.01em;
+      margin-bottom: 20px;
+      letter-spacing: 0.005em;
+      font-style: italic;
     }
-    .timeline-content p {
+    .timeline-content .desc {
       font-size: 15px;
-      line-height: 1.75;
-      color: rgba(245,245,247,0.65);
+      line-height: 1.8;
+      color: var(--text-soft);
       font-weight: 300;
     }
+    .timeline-content .desc strong {
+      color: var(--text);
+      font-weight: 600;
+      background: linear-gradient(90deg, rgba(0,113,227,0.2), rgba(191,90,242,0.2));
+      padding: 0 5px;
+      border-radius: 4px;
+    }
+
+    /* Logo slot for each startup */
+    .startup-logo-slot {
+      width: 72px; height: 72px;
+      border-radius: 18px;
+      background: var(--surface2);
+      border: 1px dashed var(--border-bright);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 8px;
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.3s ease;
+    }
+    .startup-logo-slot:hover {
+      border-color: var(--accent);
+      border-style: solid;
+    }
+    .startup-logo-slot img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      padding: 8px;
+    }
+
     .timeline-tech {
       display: flex; flex-wrap: wrap; gap: 8px;
-      margin-top: 20px;
+      margin-top: 22px;
     }
     .tech-tag {
-      background: var(--surface2);
+      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-size: 12px;
+      border-radius: 8px;
+      padding: 5px 11px;
+      font-size: 11px;
       font-family: 'Space Mono', monospace;
       color: var(--text-muted);
+      letter-spacing: 0.03em;
+      transition: all 0.2s;
     }
-    .lesson-box {
-      margin-top: 20px;
-      background: rgba(255,159,10,0.06);
-      border: 1px solid rgba(255,159,10,0.15);
-      border-radius: 12px;
-      padding: 14px 18px;
-      font-size: 13px;
-      color: rgba(255,159,10,0.85);
-      display: flex; gap: 10px; align-items: flex-start;
-    }
-    .lesson-box::before { content: '💡'; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .tech-tag:hover { color: var(--text); border-color: var(--border-bright); }
 
-    /* CURRENT — ZUPLY */
-    .zuply-section { background: var(--bg); }
+    .lesson-box {
+      margin-top: 24px;
+      background: linear-gradient(135deg, rgba(255,159,10,0.06), rgba(255,159,10,0.02));
+      border: 1px solid rgba(255,159,10,0.18);
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: rgba(255,193,96,0.95);
+      display: flex; gap: 12px; align-items: flex-start;
+      line-height: 1.6;
+    }
+    .lesson-box::before {
+      content: '💡';
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .lesson-box strong {
+      color: #ff9f0a;
+      font-weight: 600;
+    }
+
+    /* Special "live" green box for current */
+    .lesson-box.success {
+      background: linear-gradient(135deg, rgba(48,209,88,0.07), rgba(48,209,88,0.02));
+      border-color: rgba(48,209,88,0.2);
+      color: rgba(150,255,190,0.95);
+    }
+    .lesson-box.success::before { content: '✨'; }
+    .lesson-box.success strong { color: #30d158; }
+
+    @media (max-width: 768px) {
+      .timeline-content { padding: 28px 24px; }
+      .startup-header { flex-direction: row; }
+      .startup-logo-slot { width: 56px; height: 56px; }
+    }
+
+    /* ============ ZUPLY ============ */
+    .zuply-section {
+      background: var(--bg2);
+      position: relative;
+      overflow: hidden;
+    }
     .zuply-card {
-      background: var(--surface);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(15,15,15,0.9) 100%);
       border: 1px solid var(--border);
       border-radius: 32px;
       padding: 64px;
@@ -550,84 +1013,193 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 60% at 80% 20%, rgba(0,113,227,0.15) 0%, transparent 60%),
-                  radial-gradient(ellipse 50% 50% at 20% 80%, rgba(48,209,88,0.1) 0%, transparent 60%);
+      background:
+        radial-gradient(ellipse 60% 60% at 85% 15%, rgba(0,113,227,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 15% 85%, rgba(48,209,88,0.12) 0%, transparent 60%);
     }
     .zuply-inner { position: relative; z-index: 1; }
     .zuply-header {
       display: flex; align-items: flex-start; justify-content: space-between;
-      flex-wrap: wrap; gap: 24px;
+      flex-wrap: wrap; gap: 32px;
       margin-bottom: 40px;
+    }
+    .zuply-logo-block {
+      display: flex; align-items: center; gap: 22px;
+    }
+    .zuply-logo-slot {
+      width: 88px; height: 88px;
+      border-radius: 22px;
+      background: var(--surface2);
+      border: 1px dashed var(--border-bright);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0,113,227,0.15);
+      transition: border-color 0.3s ease;
+    }
+    .zuply-logo-slot:hover { border-color: var(--accent); border-style: solid; }
+    .zuply-logo-slot img {
+      width: 100%; height: 100%;
+      object-fit: contain;
     }
     .zuply-logo {
       font-family: 'Unbounded', sans-serif;
-      font-size: 48px;
+      font-size: clamp(42px, 6vw, 64px);
       font-weight: 900;
-      letter-spacing: -0.04em;
-      background: var(--grad2);
+      letter-spacing: -0.045em;
+      line-height: 1;
+      background: var(--grad-success);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    .zuply-sub {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-top: 10px;
+      font-weight: 300;
+    }
     .zuply-status {
-      display: flex; align-items: center; gap: 8px;
+      display: inline-flex; align-items: center; gap: 10px;
       background: rgba(48,209,88,0.1);
-      border: 1px solid rgba(48,209,88,0.25);
+      border: 1px solid rgba(48,209,88,0.3);
       border-radius: 100px;
       padding: 10px 20px;
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 600;
       color: #30d158;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
     .zuply-status::before {
       content: '';
       width: 8px; height: 8px;
       border-radius: 50%;
       background: #30d158;
+      box-shadow: 0 0 12px #30d158;
       animation: pulse 2s infinite;
     }
+
     .zuply-desc {
       font-size: 20px;
       line-height: 1.65;
-      color: rgba(245,245,247,0.8);
+      color: var(--text-soft);
       font-weight: 300;
       margin-bottom: 40px;
-      max-width: 700px;
+      max-width: 760px;
     }
+    .zuply-desc strong {
+      color: var(--text);
+      font-weight: 500;
+      background: linear-gradient(90deg, rgba(48,209,88,0.25), rgba(0,113,227,0.25));
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+
+    .zuply-manifesto {
+      background: rgba(0,0,0,0.3);
+      border-left: 3px solid var(--accent-green);
+      padding: 20px 24px;
+      border-radius: 0 16px 16px 0;
+      margin-bottom: 40px;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
     .zuply-features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
+      margin-bottom: 48px;
     }
     .feature-card {
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 28px;
-      transition: background 0.2s, border-color 0.2s;
+      padding: 30px 26px;
+      transition: all 0.3s ease;
     }
     .feature-card:hover {
-      background: rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.06);
       border-color: var(--border-bright);
+      transform: translateY(-3px);
     }
-    .feature-icon {
-      font-size: 28px;
-      margin-bottom: 12px;
-      display: block;
+    .feature-icon-box {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(0,113,227,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
     }
+    .feature-card:nth-child(2) .feature-icon-box { background: rgba(48,209,88,0.12); }
+    .feature-card:nth-child(3) .feature-icon-box { background: rgba(191,90,242,0.12); }
     .feature-card h4 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 8px;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
     }
     .feature-card p {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.65;
       font-weight: 300;
     }
 
-    /* SKILLS */
-    .skills-section { background: var(--bg2); }
+    .zuply-roles {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 36px;
+    }
+    .zuply-roles h4 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .role-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .role-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px;
+      color: var(--text-soft);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .role-item::before {
+      content: '→';
+      color: var(--accent-green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+      .zuply-card { padding: 40px 28px; }
+      .zuply-features { grid-template-columns: 1fr; }
+      .role-list { grid-template-columns: 1fr; }
+    }
+
+    /* ============ SKILLS ============ */
+    .skills-section { background: var(--bg); }
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -638,166 +1210,285 @@
       border: 1px solid var(--border);
       border-radius: 24px;
       padding: 36px 32px;
-      transition: border-color 0.3s, transform 0.3s;
+      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
       position: relative;
       overflow: hidden;
     }
+    .skill-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+    .skill-card:nth-child(1)::before { background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,113,227,0.15), transparent 70%); }
+    .skill-card:nth-child(2)::before { background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(48,209,88,0.15), transparent 70%); }
+    .skill-card:nth-child(3)::before { background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,159,10,0.15), transparent 70%); }
+    .skill-card:nth-child(4)::before { background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(191,90,242,0.15), transparent 70%); }
+    .skill-card:nth-child(5)::before { background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,55,95,0.15), transparent 70%); }
+    .skill-card:nth-child(6)::before { background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(90,200,250,0.15), transparent 70%); }
     .skill-card:hover {
       border-color: var(--border-bright);
-      transform: translateY(-4px);
+      transform: translateY(-6px);
     }
-    .skill-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      opacity: 0;
-      transition: opacity 0.3s;
+    .skill-card:hover::before { opacity: 1; }
+    .skill-emoji {
+      font-size: 32px;
+      margin-bottom: 18px;
+      display: inline-block;
+      transition: transform 0.3s ease;
     }
-    .skill-card:hover::after { opacity: 1; }
-    .skill-card:nth-child(1)::after { background: var(--grad1); }
-    .skill-card:nth-child(2)::after { background: var(--grad2); }
-    .skill-card:nth-child(3)::after { background: var(--grad3); }
-    .skill-card:nth-child(4)::after { background: linear-gradient(135deg, #bf5af2, #ff375f); }
-    .skill-card:nth-child(5)::after { background: linear-gradient(135deg, #ff9f0a, #30d158); }
-    .skill-card:nth-child(6)::after { background: var(--grad1); }
-    .skill-emoji { font-size: 32px; margin-bottom: 16px; display: block; }
+    .skill-card:hover .skill-emoji { transform: scale(1.15) rotate(-8deg); }
     .skill-card h3 {
-      font-size: 17px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
     }
     .skill-card p {
       font-size: 14px;
       color: var(--text-muted);
-      line-height: 1.65;
+      line-height: 1.7;
       font-weight: 300;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
     }
     .skill-tags {
-      display: flex; flex-wrap: wrap; gap: 6px;
-      margin-top: 16px;
+      display: flex; gap: 6px; flex-wrap: wrap;
+      position: relative; z-index: 1;
     }
     .skill-tag {
-      font-size: 11px;
-      font-weight: 500;
-      padding: 3px 10px;
-      border-radius: 100px;
-      letter-spacing: 0.04em;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
     }
-    .tag-blue { background: rgba(0,113,227,0.15); color: #5ac8fa; }
-    .tag-green { background: rgba(48,209,88,0.12); color: #30d158; }
-    .tag-purple { background: rgba(191,90,242,0.12); color: #bf5af2; }
-    .tag-red { background: rgba(255,55,95,0.12); color: #ff375f; }
-    .tag-orange { background: rgba(255,159,10,0.12); color: #ff9f0a; }
+    .tag-blue { background: rgba(0,113,227,0.12); color: var(--accent-cyan); }
+    .tag-green { background: rgba(48,209,88,0.12); color: var(--accent-green); }
+    .tag-orange { background: rgba(255,159,10,0.12); color: var(--accent-orange); }
+    .tag-purple { background: rgba(191,90,242,0.12); color: var(--accent-purple); }
+    .tag-red { background: rgba(255,55,95,0.12); color: var(--accent-red); }
 
-    /* CONTACT */
-    .contact-section { background: var(--bg); }
+    @media (max-width: 900px) {
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============ PRINCIPLES / QUOTE ============ */
+    .principles-section {
+      padding: 160px 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .principles-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 40%, rgba(0,113,227,0.08), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 60%, rgba(191,90,242,0.08), transparent 60%);
+    }
+    .big-quote {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      max-width: 980px;
+      text-align: center;
+      margin: 0 auto 48px;
+      position: relative;
+      z-index: 1;
+    }
+    .big-quote em {
+      font-family: 'Unbounded', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      background: var(--grad-fire);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .quote-author {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative; z-index: 1;
+    }
+    .quote-author::before, .quote-author::after {
+      content: '—';
+      margin: 0 12px;
+      color: var(--text-dim);
+    }
+
+    /* ============ CONTACT ============ */
+    .contact-section {
+      padding: 140px 24px;
+      background: var(--bg);
+    }
     .contact-card {
-      background: var(--surface);
+      background: linear-gradient(135deg, var(--surface) 0%, rgba(20,20,20,0.6) 100%);
       border: 1px solid var(--border);
       border-radius: 32px;
       padding: 80px 64px;
       text-align: center;
       position: relative;
       overflow: hidden;
+      max-width: 900px;
+      margin: 0 auto;
     }
     .contact-card::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 70% at 50% 100%, rgba(0,113,227,0.15) 0%, transparent 60%);
+      background:
+        radial-gradient(ellipse 60% 80% at 50% 100%, rgba(0,113,227,0.2), transparent 70%),
+        radial-gradient(ellipse 40% 50% at 50% 0%, rgba(191,90,242,0.12), transparent 70%);
     }
-    .contact-card > * { position: relative; z-index: 1; }
+    .contact-inner { position: relative; z-index: 1; }
     .contact-card h2 {
       font-family: 'Unbounded', sans-serif;
-      font-size: clamp(28px, 5vw, 52px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 20px;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 28px;
+    }
+    .contact-card h2 em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-weight: 400;
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .contact-card p {
-      font-size: 18px;
-      color: var(--text-muted);
+      font-size: 19px;
+      color: var(--text-soft);
       font-weight: 300;
-      max-width: 560px;
-      margin: 0 auto 48px;
-      line-height: 1.65;
+      line-height: 1.6;
+      margin-bottom: 48px;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .contact-links {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
     }
     .contact-link {
-      display: flex; align-items: center; gap: 10px;
-      background: var(--surface2);
+      background: rgba(255,255,255,0.04);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 28px;
-      text-decoration: none;
+      border-radius: 100px;
+      padding: 14px 24px;
+      font-size: 14px;
       color: var(--text);
-      font-size: 15px;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
       font-weight: 500;
-      transition: background 0.2s, border-color 0.2s, transform 0.15s;
     }
     .contact-link:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: var(--border-bright);
-      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-3px);
     }
-    .contact-link-icon { font-size: 20px; }
+    .contact-link-icon { font-size: 18px; }
 
-    /* FOOTER */
+    .contact-availability {
+      margin-top: 40px;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .contact-availability::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 768px) {
+      .contact-card { padding: 56px 28px; }
+    }
+
+    /* ============ FOOTER ============ */
     footer {
+      padding: 40px 24px 48px;
       border-top: 1px solid var(--border);
-      padding: 40px 24px;
       text-align: center;
-      color: var(--text-dim);
-      font-size: 13px;
+      background: var(--bg);
     }
-    footer span {
-      background: var(--grad1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 600;
+    footer .footer-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    footer p {
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 300;
+    }
+    footer p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+    footer .footer-right {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    /* SCROLL REVEAL */
+    /* ============ REVEAL ============ */
     .reveal {
       opacity: 0;
       transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
 
-    /* RESPONSIVE */
+    /* ============ RESPONSIVE ============ */
     @media (max-width: 900px) {
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .about-grid { grid-template-columns: 1fr; }
-      .stats-inner { grid-template-columns: repeat(2, 1fr); }
-      .zuply-features { grid-template-columns: 1fr 1fr; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      .timeline::before { left: 22px; }
-      .timeline-item { grid-template-columns: 44px 1fr; gap: 20px; }
-      .timeline-dot { width: 44px; height: 44px; font-size: 18px; }
+      section { padding: 100px 20px; }
+      .stats-bar { padding: 80px 20px 0; }
+      .about-card { padding: 32px 28px; }
+      .zuply-card { padding: 40px 28px; }
+      .philo-card { padding: 32px 24px; }
     }
     @media (max-width: 600px) {
-      section { padding: 80px 20px; }
-      .stats-inner { grid-template-columns: 1fr 1fr; }
-      .stat-item { padding: 24px 20px; }
-      .zuply-card { padding: 36px 28px; }
-      .zuply-features { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .contact-card { padding: 48px 28px; }
-      .timeline-content { padding: 24px; }
+      .hero h1 { font-size: 52px; }
+      .hero-roles { flex-direction: column; gap: 8px; }
+      .hero-role-sep { display: none; }
+      .marquee-item { font-size: 18px; gap: 40px; }
+      .marquee-track { gap: 40px; }
+      .section-inner { padding: 0; }
     }
+
   </style>
 </head>
 <body>
@@ -807,53 +1498,94 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">N.</div>
+    <div class="nav-logo">Никита · Founder</div>
     <ul class="nav-links">
       <li><a href="#about">Обо мне</a></li>
-      <li><a href="#startups">Стартапы</a></li>
+      <li><a href="#startups">Путь</a></li>
       <li><a href="#zuply">Zuply</a></li>
-      <li><a href="#skills">Навыки</a></li>
+      <li><a href="#skills">Скиллы</a></li>
+      <li><a href="#contact">Связаться</a></li>
     </ul>
-    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Связаться</button>
+    <a href="#contact" class="nav-cta">Написать</a>
   </nav>
 
   <!-- HERO -->
-  <section class="hero" id="home">
+  <header class="hero">
     <div class="hero-bg"></div>
-    <div class="hero-noise"></div>
     <div class="hero-grid"></div>
-    <div class="hero-tag">Founder · Builder · Visionary</div>
-    <h1>
-      <div class="name-grad">Никита</div>
-      <div class="name-accent">Язвинский</div>
-    </h1>
-    <p class="hero-subtitle">
-      Серийный предприниматель из <strong>Краснодара</strong>. 6 стартапов, бесценный опыт и одна цель —
-      построить продукт <strong>мирового уровня</strong>.
-    </p>
-    <div class="hero-actions">
-      <a href="#startups" class="btn-primary">Мой путь →</a>
-      <a href="#contact" class="btn-secondary">Написать мне</a>
+    <div class="hero-noise"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+
+    <div class="hero-inner">
+
+      <!-- PHOTO SLOT -->
+      <div class="hero-profile-slot">
+        <div class="profile-photo">
+          <!-- ⬇️ СЮДА ВСТАВЬ СВОЮ ФОТКУ: замени <div class="profile-placeholder">НЯ</div> на <img src="your-photo.jpg" alt="Никита"> -->
+          <div class="profile-placeholder">НЯ</div>
+        </div>
+        <div class="profile-hint">&lt;photo slot&gt;</div>
+      </div>
+
+      <div class="hero-tag">
+        <span class="dot"></span>
+        Открыт к сотрудничеству · Краснодар → Мир
+      </div>
+
+      <h1>
+        <span class="row name-grad">Никита</span>
+        <span class="row name-accent">Язвинский</span>
+      </h1>
+
+      <div class="hero-roles">
+        <span class="hero-role">Founder</span>
+        <span class="hero-role-sep">●</span>
+        <span class="hero-role">Builder</span>
+        <span class="hero-role-sep">●</span>
+        <span class="hero-role">ML Engineer</span>
+        <span class="hero-role-sep">●</span>
+        <span class="hero-role">Product Mind</span>
+      </div>
+
+      <p class="hero-subtitle">
+        Серийный основатель. <strong>6 стартапов</strong> за плечами, один запущен сейчас. Строю продукты с <strong>ML, ИИ и душой</strong> — превращаю идеи в код, код в бизнес, а бизнес в масштаб.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#zuply" class="btn-primary"><span>Смотреть Zuply →</span></a>
+        <a href="#startups" class="btn-secondary">История 6 запусков</a>
+      </div>
     </div>
+
     <div class="hero-scroll">
+      <span>Scroll</span>
       <div class="scroll-line"></div>
-      scroll
     </div>
-  </section>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-item"><strong>Build fast</strong> <span class="dot"></span> Ship faster <span class="dot"></span> <strong>Learn from failure</strong> <span class="dot"></span> Repeat <span class="dot"></span> <strong>0→1 thinking</strong> <span class="dot"></span> Product over ego <span class="dot"></span> <strong>Custdev first</strong> <span class="dot"></span> Stay hungry</div>
+      <div class="marquee-item"><strong>Build fast</strong> <span class="dot"></span> Ship faster <span class="dot"></span> <strong>Learn from failure</strong> <span class="dot"></span> Repeat <span class="dot"></span> <strong>0→1 thinking</strong> <span class="dot"></span> Product over ego <span class="dot"></span> <strong>Custdev first</strong> <span class="dot"></span> Stay hungry</div>
+    </div>
+  </div>
 
   <!-- STATS -->
-  <div class="stats-bar reveal">
+  <div class="stats-bar">
     <div class="stats-inner">
       <div class="stat-item">
-        <span class="stat-number">6</span>
+        <span class="stat-number" data-target="6">6</span>
         <span class="stat-label">Запущенных стартапов</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">87%</span>
+        <span class="stat-number" data-target="87">87%</span>
         <span class="stat-label">Точность TradingBot</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">5+</span>
+        <span class="stat-number" data-target="5">5+</span>
         <span class="stat-label">Лет в предпринимательстве</span>
       </div>
       <div class="stat-item">
@@ -866,50 +1598,104 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="section-inner">
-      <div class="section-eyebrow reveal">Обо мне</div>
-      <h2 class="section-title reveal">Человек, который не останавливается</h2>
+      <div class="section-header">
+        <div class="section-eyebrow reveal">Обо мне</div>
+        <h2 class="section-title reveal">Человек, который<br><em>не останавливается</em></h2>
+        <p class="section-desc reveal">Короткая биография того, кто вместо выходных открывает IDE, вместо советов слушает рынок, а вместо жалоб — строит.</p>
+      </div>
+
       <div class="about-grid">
-        <div class="about-card reveal">
-          <p>С <strong>раннего детства</strong> меня тянуло к созданию проектов и к здоровой конкуренции. Не ради денег — ради самого процесса создания чего-то полезного.</p>
-          <p>В <strong>16 лет</strong> я задал себе главный вопрос: чего я хочу от жизни? И ответ был чётким — строить проекты мирового масштаба. Такие, как Google. И я начал с малого.</p>
-          <p>Каждый неудавшийся стартап — не поражение, а <strong>урок</strong>. Я не умею сдаваться. Армия, конкуренты, рынок — всё это только закалило. Сейчас я готов к большому.</p>
+
+        <div class="about-left">
+          <div class="about-card reveal">
+            <div class="about-quote">«Ради самого процесса создания чего-то полезного.»</div>
+            <p>С <strong>раннего детства</strong> меня тянуло к созданию проектов и к здоровой конкуренции. Я не собирал игрушки — я собирал схемы, идеи, команды. Не ради денег, не ради признания — ради чистого удовольствия от момента, когда что-то, чего раньше не существовало, вдруг начинает работать.</p>
+            <p>В <strong>16 лет</strong> я задал себе главный вопрос: чего я хочу от жизни? Ответ был чётким — строить проекты <strong>мирового масштаба</strong>. Такие, как Google. И вместо того, чтобы ждать «подходящего момента», я начал с малого: первый торговый бот, первая команда, первые провалы.</p>
+            <p>Каждый неудавшийся стартап — не поражение, а <strong>урок, оплаченный временем и нервами</strong>. Я не умею сдаваться — это не красивая фраза для LinkedIn, это факт, проверенный армией, конкурентами и рынком. Сейчас, в 2026-м, я готов к большому запуску. И я знаю, чего мне стоили эти 6 попыток.</p>
+          </div>
+
+          <div class="about-card reveal reveal-delay-1" style="padding:36px 44px;">
+            <p style="color:var(--text); font-weight:400; font-size:17px;">Если описать меня одной фразой — я тот, кто <strong>превращает «а что если» в «работает»</strong>. Техническое мышление + продуктовое чутьё + упрямство, которое многие называют наивностью, а я — топливом.</p>
+          </div>
         </div>
-        <div class="about-visual reveal reveal-delay-2">
-          <div class="about-pill">
-            <div class="pill-icon" style="background:rgba(0,113,227,0.12)">🎯</div>
-            <div class="pill-text">
-              <strong>Краснодар → Мир</strong>
-              <span>Амбиции без географических границ</span>
+
+        <div class="about-visual">
+
+          <!-- PHOTO SLOT (BIG) -->
+          <div class="photo-slot-big reveal">
+            <!-- ⬇️ СЮДА ВСТАВЬ СВОЮ ФОТКУ: замени блок photo-inner на <img src="your-photo.jpg" alt="Никита Язвинский"> -->
+            <div class="photo-inner">
+              <span class="photo-icon">📸</span>
+              <span class="photo-label">Место для<br>твоей фотографии<br>4:5</span>
+            </div>
+            <div class="photo-meta">NIKITA · 2026 · KRASNODAR</div>
+          </div>
+
+          <div class="about-pills">
+            <div class="about-pill reveal reveal-delay-1">
+              <div class="pill-icon" style="background:rgba(0,113,227,0.12)">🎯</div>
+              <div class="pill-text">
+                <strong>Краснодар → Мир</strong>
+                <span>Амбиции без географических границ</span>
+              </div>
+            </div>
+            <div class="about-pill reveal reveal-delay-2">
+              <div class="pill-icon" style="background:rgba(48,209,88,0.12)">🤖</div>
+              <div class="pill-text">
+                <strong>ML & Алготрейдинг</strong>
+                <span>Python, технический анализ, фондовый рынок</span>
+              </div>
+            </div>
+            <div class="about-pill reveal reveal-delay-3">
+              <div class="pill-icon" style="background:rgba(191,90,242,0.12)">⚡️</div>
+              <div class="pill-text">
+                <strong>Full-Stack мышление</strong>
+                <span>От идеи до product-market fit</span>
+              </div>
+            </div>
+            <div class="about-pill reveal reveal-delay-4">
+              <div class="pill-icon" style="background:rgba(255,159,10,0.12)">🚀</div>
+              <div class="pill-text">
+                <strong>Серийный основатель</strong>
+                <span>6 стартапов — опыт, которого не купить</span>
+              </div>
+            </div>
+            <div class="about-pill reveal reveal-delay-4">
+              <div class="pill-icon" style="background:rgba(255,55,95,0.12)">🧠</div>
+              <div class="pill-text">
+                <strong>CustDev & Product</strong>
+                <span>Строю то, что нужно людям, а не мне</span>
+              </div>
             </div>
           </div>
-          <div class="about-pill">
-            <div class="pill-icon" style="background:rgba(48,209,88,0.12)">🤖</div>
-            <div class="pill-text">
-              <strong>ML & Алготрейдинг</strong>
-              <span>Python, технический анализ, фондовый рынок</span>
-            </div>
-          </div>
-          <div class="about-pill">
-            <div class="pill-icon" style="background:rgba(191,90,242,0.12)">⚡️</div>
-            <div class="pill-text">
-              <strong>Full-Stack мышление</strong>
-              <span>От идеи до product-market fit</span>
-            </div>
-          </div>
-          <div class="about-pill">
-            <div class="pill-icon" style="background:rgba(255,159,10,0.12)">🚀</div>
-            <div class="pill-text">
-              <strong>Серийный основатель</strong>
-              <span>6 стартапов — опыт, которого не купить</span>
-            </div>
-          </div>
-          <div class="about-pill">
-            <div class="pill-icon" style="background:rgba(255,55,95,0.12)">🧠</div>
-            <div class="pill-text">
-              <strong>CustDev & Product</strong>
-              <span>Строю то, что нужно людям, а не себе</span>
-            </div>
-          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow reveal">Философия</div>
+        <h2 class="section-title reveal">Три правила, которые<br><em>стоили мне стартапов</em></h2>
+      </div>
+      <div class="philosophy-grid">
+        <div class="philo-card reveal">
+          <div class="philo-number">01</div>
+          <h3>Скорость бьёт идею</h3>
+          <p>Самая гениальная идея ничего не стоит, если её сделали до тебя или после тебя, но быстрее. VideoNotes опередил Яндекс на год, но <strong style="color:var(--text)">«на год раньше»</strong> без ship-а равно «никогда». Вывод: релизь, пока страшно. Стыдно — это признак того, что ты вовремя.</p>
+        </div>
+        <div class="philo-card reveal reveal-delay-1">
+          <div class="philo-number">02</div>
+          <h3>Система важнее героизма</h3>
+          <p>Я ушёл в армию — и два готовых продукта замерли. Продукт, который живёт только пока его толкает основатель, — это не бизнес, это хобби на костылях. <strong style="color:var(--text)">Строй систему, которая работает без тебя.</strong> С первого дня.</p>
+        </div>
+        <div class="philo-card reveal reveal-delay-2">
+          <div class="philo-number">03</div>
+          <h3>Технология — 20%. Продажи — 80%</h3>
+          <p>RealTime Translator был технически впереди рынка. Сейчас эта технология встроена в продукты корпораций. Я её сделал — и забросил, потому что не умел продавать. <strong style="color:var(--text)">Код без дистрибуции — это pet project.</strong> Сейчас я учусь продавать так же серьёзно, как писать код.</p>
         </div>
       </div>
     </div>
@@ -918,112 +1704,172 @@
   <!-- STARTUPS -->
   <section id="startups" class="startups-section">
     <div class="section-inner">
-      <div class="section-eyebrow reveal">Путь основателя</div>
-      <h2 class="section-title reveal">6 стартапов.<br>6 уроков.</h2>
-      <p class="section-desc reveal">Каждый проект — это шаг вперёд. Пусть не всегда удачный, но всегда осмысленный.</p>
+      <div class="section-header">
+        <div class="section-eyebrow reveal">Путь основателя</div>
+        <h2 class="section-title reveal">6 стартапов.<br>6 <em>уроков</em>.</h2>
+        <p class="section-desc reveal">Это не хронология побед — это честный журнал основателя. Каждый проект был большой мечтой, каждый провал стал ступенькой. Без них не было бы Zuply. И меня сегодняшнего.</p>
+      </div>
 
       <div class="timeline">
 
         <!-- 1 -->
         <div class="timeline-item reveal">
-          <div class="timeline-dot" style="border-color:rgba(0,113,227,0.4)">🤖</div>
+          <div class="timeline-dot" style="border-color:rgba(0,113,227,0.5);background:rgba(0,113,227,0.08);">🤖</div>
           <div class="timeline-content">
-            <div class="timeline-meta">
-              <span class="startup-number">01 / 2020</span>
-              <span class="startup-badge badge-failed">Ранний выход</span>
+            <div class="startup-header">
+              <div class="startup-header-left">
+                <div class="timeline-meta">
+                  <span class="startup-number">01 · 2020</span>
+                  <span class="startup-badge badge-failed">Ранний выход</span>
+                </div>
+                <h3>TradingBot</h3>
+                <div class="tagline">Бот, который торгует как профессионал</div>
+              </div>
+              <!-- ⬇️ СЛОТ ПОД ЛОГО СТАРТАПА — замени <span> на <img src="tradingbot-logo.svg"> -->
+              <div class="startup-logo-slot"><span>&lt;logo&gt;<br>TradingBot</span></div>
             </div>
-            <h3>TradingBot</h3>
-            <div class="tagline">Бот, который торгует как профессионал</div>
-            <p>Торговый бот с точностью прогнозов <strong>87%</strong>, который приносил <strong>3% в день</strong> от депозита торгуя акциями ВТБ на Тинькофф Инвестициях. Написан на Python с применением машинного обучения и технического анализа. Собрал команду из WPF, Backend и Full-stack разработчиков для создания приложения и лендинга.</p>
+            <p class="desc">Первый серьёзный запуск. Торговый бот с точностью прогнозов <strong>87%</strong>, стабильно приносивший <strong>3% в день от депозита</strong> на акциях ВТБ через API Тинькофф Инвестиций. Внутри — Python, ML-модели на технических индикаторах, автоматическое управление рисками. Я собрал первую команду: WPF, Backend, Full-stack разработчики. Сделали приложение, лендинг, продумали монетизацию.</p>
             <div class="timeline-tech">
               <span class="tech-tag">Python</span>
-              <span class="tech-tag">ML</span>
-              <span class="tech-tag">Тинькофф API</span>
-              <span class="tech-tag">Тех. анализ</span>
+              <span class="tech-tag">Machine Learning</span>
+              <span class="tech-tag">Tinkoff API</span>
+              <span class="tech-tag">Tech Analysis</span>
+              <span class="tech-tag">WPF</span>
             </div>
-            <div class="lesson-box">Не смог заключить договор до совершеннолетия. К 18 годам рынок заполнился аналогами. Урок: скорость выхода решает всё.</div>
+            <div class="lesson-box"><span><strong>Урок №1:</strong> Не смог заключить договор до совершеннолетия — юридически не мог принимать платежи. К 18-ти годам рынок заполнился аналогами. <strong>Скорость выхода решает всё.</strong> Пока ты ждёшь «правильного момента», рынок его у тебя забирает.</span></div>
           </div>
         </div>
 
         <!-- 2 -->
         <div class="timeline-item reveal">
-          <div class="timeline-dot" style="border-color:rgba(191,90,242,0.4)">📝</div>
+          <div class="timeline-dot" style="border-color:rgba(191,90,242,0.5);background:rgba(191,90,242,0.08);">📝</div>
           <div class="timeline-content">
-            <div class="timeline-meta">
-              <span class="startup-number">02 / 2022</span>
-              <span class="startup-badge badge-missed">Опередил рынок</span>
+            <div class="startup-header">
+              <div class="startup-header-left">
+                <div class="timeline-meta">
+                  <span class="startup-number">02 · 2022</span>
+                  <span class="startup-badge badge-missed">Опередил рынок</span>
+                </div>
+                <h3>VideoNotes</h3>
+                <div class="tagline">Многочасовые лекции → структурированные конспекты</div>
+              </div>
+              <div class="startup-logo-slot"><span>&lt;logo&gt;<br>VideoNotes</span></div>
             </div>
-            <h3>VideoNotes</h3>
-            <div class="tagline">Многочасовые лекции → структурированные конспекты</div>
-            <p>Платформа для конвертации видео-лекций в красивые структурированные конспекты. Рабочий сайт, мощный backend, восторженные отзывы преподавательского состава колледжа. Идея на несколько лет опережала Яндекс.</p>
+            <p class="desc">Платформа, которая превращала видео-лекции в красивые структурированные конспекты с тайм-кодами, ключевыми идеями и цитатами. Рабочий сайт, мощный backend, собственные алгоритмы NLP. Преподаватели нашего колледжа были в восторге и писали отзывы — живой, настоящий product-market fit в узкой нише. Идея на <strong>несколько лет опережала Яндекс</strong>.</p>
             <div class="timeline-tech">
-              <span class="tech-tag">Web</span>
+              <span class="tech-tag">Web App</span>
               <span class="tech-tag">NLP</span>
               <span class="tech-tag">Backend</span>
+              <span class="tech-tag">Python</span>
             </div>
-            <div class="lesson-box">Через месяц после разработки Яндекс выпустил аналогичный продукт. Урок: validate fast, ship faster — нельзя ждать ресурсов.</div>
+            <div class="lesson-box"><span><strong>Урок №2:</strong> Через месяц после релиза Яндекс выпустил <strong>аналогичный продукт в YaGPT</strong>. Корпорация с ресурсами всегда догонит — догоняет за неделю то, на что у стартапа ушли месяцы. <em>Validate fast, ship faster.</em> Нельзя ждать идеального пайплайна.</span></div>
           </div>
         </div>
 
         <!-- 3 -->
         <div class="timeline-item reveal">
-          <div class="timeline-dot" style="border-color:rgba(48,209,88,0.4)">🎙️</div>
+          <div class="timeline-dot" style="border-color:rgba(48,209,88,0.5);background:rgba(48,209,88,0.08);">🎙️</div>
           <div class="timeline-content">
-            <div class="timeline-meta">
-              <span class="startup-number">03 / 2022</span>
-              <span class="startup-badge badge-missed">Реализовали другие</span>
+            <div class="startup-header">
+              <div class="startup-header-left">
+                <div class="timeline-meta">
+                  <span class="startup-number">03 · 2022</span>
+                  <span class="startup-badge badge-missed">Реализовали другие</span>
+                </div>
+                <h3>RealTime Translator</h3>
+                <div class="tagline">Перевод голоса в реальном времени с голосом собеседника</div>
+              </div>
+              <div class="startup-logo-slot"><span>&lt;logo&gt;<br>RT Translator</span></div>
             </div>
-            <h3>RealTime Translator</h3>
-            <div class="tagline">Перевод голоса в реальном времени с голосом собеседника</div>
-            <p>Технология перевода речи в реальном времени с минимальной задержкой — с сохранением оригинального голоса говорящего. Это то, что сейчас встроено в продукты крупных компаний по всему миру. Я это сделал раньше.</p>
+            <p class="desc">Технология перевода речи в реальном времени с минимальной задержкой — с <strong>сохранением голоса говорящего</strong>. То самое, что сейчас встроено в Meet, Apple Live Translate, Samsung Galaxy AI. Я это сделал раньше. Прототип работал. Можно было разговаривать с человеком на другом языке — и слышать его перевод собственным голосом, почти без задержки. Волшебство.</p>
             <div class="timeline-tech">
               <span class="tech-tag">Real-time AI</span>
               <span class="tech-tag">TTS</span>
               <span class="tech-tag">Voice Cloning</span>
+              <span class="tech-tag">Speech-to-Speech</span>
             </div>
-            <div class="lesson-box">Не было опыта в B2B-продажах. Забросил вместо того, чтобы продать. Урок: технология — это 20%. Продажи — это 80%.</div>
+            <div class="lesson-box"><span><strong>Урок №3:</strong> Не было опыта в B2B-продажах, нулевой нетворк в индустрии. Забросил технологию вместо того, чтобы её <strong>продать корпорации или превратить в SaaS</strong>. <em>Технология — это 20%. Продажи, дистрибуция, позиционирование — это 80%.</em> Сейчас это моя главная боль и главный рост.</span></div>
           </div>
         </div>
 
         <!-- 4 -->
         <div class="timeline-item reveal">
-          <div class="timeline-dot" style="border-color:rgba(255,159,10,0.4)">🖥️</div>
+          <div class="timeline-dot" style="border-color:rgba(255,159,10,0.5);background:rgba(255,159,10,0.08);">🖥️</div>
           <div class="timeline-content">
-            <div class="timeline-meta">
-              <span class="startup-number">04 / 2023</span>
-              <span class="startup-badge badge-paused">Приостановлен</span>
+            <div class="startup-header">
+              <div class="startup-header-left">
+                <div class="timeline-meta">
+                  <span class="startup-number">04 · 2023</span>
+                  <span class="startup-badge badge-paused">Приостановлен</span>
+                </div>
+                <h3>Coreator</h3>
+                <div class="tagline">Игровой ПК мечты за 3 клика</div>
+              </div>
+              <div class="startup-logo-slot"><span>&lt;logo&gt;<br>Coreator</span></div>
             </div>
-            <h3>Coreator</h3>
-            <div class="tagline">Игровой ПК мечты в 3 клика</div>
-            <p>Платформа для сборки игровых ПК через умную рекомендательную систему — отвечаешь на вопросы, получаешь идеальную сборку и сразу заказываешь. Закупки из Китая, собственный магазин. Лучшая команда: UI/UX, ML, Backend, Frontend. Сайт готов, дизайн крутой, всё работает.</p>
+            <p class="desc">Платформа для сборки игровых ПК через <strong>умную рекомендательную систему</strong>: отвечаешь на вопросы («какие игры?», «разрешение?», «бюджет?»), ML-модель подбирает конфигурацию, ты получаешь не «список компонентов», а готовую сборку с альтернативами и сразу можешь заказать. Бэкенд-закупки из Китая, собственный магазин, полный контроль маржи. Я собрал <strong>лучшую команду за все годы</strong>: отдельные люди на UI/UX, ML, Backend, Frontend. Сайт был готов, дизайн — топ, всё работало.</p>
             <div class="timeline-tech">
               <span class="tech-tag">Recommender System</span>
               <span class="tech-tag">ML</span>
               <span class="tech-tag">E-commerce</span>
               <span class="tech-tag">UI/UX</span>
+              <span class="tech-tag">Supply Chain</span>
             </div>
-            <div class="lesson-box">Ушёл в армию, так и не запустив. Урок: launch before you're ready — перфекционизм убивает стартапы.</div>
+            <div class="lesson-box"><span><strong>Урок №4:</strong> Ушёл в армию, так и не нажав кнопку «Запустить». Команда разошлась, momentum умер. <em>Launch before you're ready.</em> <strong>Перфекционизм убивает стартапы эффективнее любого конкурента.</strong> Несовершенный лайв лучше идеального «почти готово».</span></div>
           </div>
         </div>
 
         <!-- 5 -->
         <div class="timeline-item reveal">
-          <div class="timeline-dot" style="border-color:rgba(255,55,95,0.4)">💼</div>
+          <div class="timeline-dot" style="border-color:rgba(255,55,95,0.5);background:rgba(255,55,95,0.08);">💼</div>
           <div class="timeline-content">
-            <div class="timeline-meta">
-              <span class="startup-number">05 / 2023</span>
-              <span class="startup-badge badge-paused">Приостановлен</span>
+            <div class="startup-header">
+              <div class="startup-header-left">
+                <div class="timeline-meta">
+                  <span class="startup-number">05 · 2023</span>
+                  <span class="startup-badge badge-paused">Приостановлен</span>
+                </div>
+                <h3>Freerith</h3>
+                <div class="tagline">Фриланс без комиссии, демпинга и боли</div>
+              </div>
+              <div class="startup-logo-slot"><span>&lt;logo&gt;<br>Freerith</span></div>
             </div>
-            <h3>Freerith</h3>
-            <div class="tagline">Фриланс без комиссии, демпинга и боли</div>
-            <p>Фриланс-платформа, рождённая из личной боли и <strong>custdev-интервью</strong>. Заменили комиссию на тарифы, убрали платные отклики, добавили вывод в любое время и отбор по качеству — не по цене. 2 созвона в день, чёткая структура, полная документация. Первые дни — много живых отзывов.</p>
+            <p class="desc">Фриланс-платформа, рождённая из личной боли и <strong>более 20 custdev-интервью</strong> с фрилансерами и заказчиками. Заменили комиссию с каждой сделки на понятные тарифы. Убрали платные отклики. Добавили мгновенный вывод средств в любое время. Внедрили отбор исполнителей по <strong>качеству и портфолио, а не по цене</strong> — чтобы сломать гонку на дно. Два созвона команды в день, чёткая структура спринтов, полная документация. Первые дни после релиза — много живых тёплых отзывов. У нас было сообщество, которое хотело, чтобы мы выжили.</p>
             <div class="timeline-tech">
               <span class="tech-tag">CustDev</span>
               <span class="tech-tag">Marketplace</span>
               <span class="tech-tag">FinTech</span>
               <span class="tech-tag">Team Lead</span>
+              <span class="tech-tag">Product</span>
             </div>
-            <div class="lesson-box">Снова армия. Продукт жил несколько дней. Урок: строй систему, которая работает без тебя с первого дня.</div>
+            <div class="lesson-box"><span><strong>Урок №5:</strong> Снова армия. Продукт жил несколько дней без меня и умер. <em>Продукт без автономной системы = проект на костылях.</em> <strong>Строй команду и процессы так, чтобы они ехали без тебя с первого дня — иначе ты не основатель, ты single point of failure.</strong></span></div>
+          </div>
+        </div>
+
+        <!-- 6 — ZUPLY -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot" style="border-color:rgba(48,209,88,0.6);background:rgba(48,209,88,0.12);box-shadow: 0 0 0 6px rgba(48,209,88,0.08);">🌏</div>
+          <div class="timeline-content" style="border-color:rgba(48,209,88,0.2); background: linear-gradient(135deg, rgba(48,209,88,0.04), rgba(20,20,20,0.6));">
+            <div class="startup-header">
+              <div class="startup-header-left">
+                <div class="timeline-meta">
+                  <span class="startup-number">06 · 2025 — now</span>
+                  <span class="startup-badge badge-live">Live &amp; Building</span>
+                </div>
+                <h3>Zuply</h3>
+                <div class="tagline">Производство в Китае — просто, как заказать такси</div>
+              </div>
+              <div class="startup-logo-slot" style="border-color:rgba(48,209,88,0.5);"><span>&lt;logo&gt;<br>Zuply</span></div>
+            </div>
+            <p class="desc">Мой шестой запуск — и первый, в который я захожу с полным багажом 5 предыдущих уроков. IT-платформа, которая <strong>убирает барьеры между идеей и физическим продуктом на полке</strong>. Производство под ключ, прозрачность, контроль качества, быстрая поставка. О нём — в следующем блоке ↓</p>
+            <div class="timeline-tech">
+              <span class="tech-tag">IT-Platform</span>
+              <span class="tech-tag">Supply Chain</span>
+              <span class="tech-tag">B2B SaaS</span>
+              <span class="tech-tag">Manufacturing</span>
+              <span class="tech-tag">Cross-border</span>
+            </div>
+            <div class="lesson-box success"><span><strong>Принцип №6:</strong> Не жду идеального момента. Строю систему с первого дня. Продаю параллельно с кодом. Ищу команду до, а не после. <strong>На этот раз всё по-другому.</strong></span></div>
           </div>
         </div>
 
@@ -1034,41 +1880,70 @@
   <!-- ZUPLY -->
   <section id="zuply" class="zuply-section">
     <div class="section-inner">
-      <div class="section-eyebrow reveal">Сейчас</div>
-      <h2 class="section-title reveal">Текущий проект</h2>
+      <div class="section-header">
+        <div class="section-eyebrow reveal">Сейчас · Active Build</div>
+        <h2 class="section-title reveal">Текущий<br><em>главный</em> проект</h2>
+        <p class="section-desc reveal">То, ради чего были все 5 предыдущих запусков. Сфокусированно, с командой, с планом и без иллюзий.</p>
+      </div>
+
       <div class="zuply-card reveal">
         <div class="zuply-inner">
+
           <div class="zuply-header">
-            <div>
-              <div class="zuply-logo">Zuply</div>
-              <p style="color:var(--text-muted);font-size:15px;margin-top:8px;font-weight:300">IT-платформа для производства физических товаров в Китае</p>
+            <div class="zuply-logo-block">
+              <!-- ⬇️ СЛОТ ПОД ЛОГО ZUPLY — замени на <img src="zuply-logo.svg"> -->
+              <div class="zuply-logo-slot"><span>&lt;logo&gt;<br>Zuply</span></div>
+              <div>
+                <div class="zuply-logo">Zuply</div>
+                <p class="zuply-sub">IT-платформа для производства физических товаров в Китае</p>
+              </div>
             </div>
             <div class="zuply-status">В активной разработке</div>
           </div>
+
           <p class="zuply-desc">
-            Zuply — это платформа, которая делает производство в Китае <strong>простым, прозрачным и доступным</strong> для предпринимателей любого уровня. Мы убираем барьеры между идеей и физическим продуктом на полке.
+            Zuply делает производство в Китае <strong>простым, прозрачным и доступным</strong> для предпринимателей любого уровня — от блогера, который хочет выпустить свой мерч, до ритейлера, масштабирующего линейку. Мы убираем посредников, языковой барьер, непрозрачные наценки и боль первой партии.
           </p>
+
+          <div class="zuply-manifesto">
+            «Раньше запустить свой физический продукт было квестом на полгода. Мы сокращаем это до недель — и делаем так, чтобы ты видел каждый шаг.»
+          </div>
+
           <div class="zuply-features">
             <div class="feature-card">
-              <span class="feature-icon">🏭</span>
+              <div class="feature-icon-box">🏭</div>
               <h4>Производство под ключ</h4>
-              <p>Полный цикл от прототипа до готового товара с фабриками в Китае</p>
+              <p>Полный цикл: от 3D-прототипа до готовой партии на складе. Проверенные фабрики в Китае, контроль производства, международная логистика — в одном окне.</p>
             </div>
             <div class="feature-card">
-              <span class="feature-icon">🔍</span>
-              <h4>Прозрачность</h4>
-              <p>Контроль качества, отслеживание заказов, понятные условия без скрытых наценок</p>
+              <div class="feature-icon-box">🔍</div>
+              <h4>Честная прозрачность</h4>
+              <p>Видишь стоимость каждого этапа. Отслеживаешь заказ от станка до таможни. Получаешь отчёты по контролю качества с фото и видео. Никаких скрытых наценок — только понятный тариф.</p>
             </div>
             <div class="feature-card">
-              <span class="feature-icon">🤝</span>
-              <h4>Открыты для команды</h4>
-              <p>Ищем единомышленников на начальном этапе. Присоединяйся к чему-то большому</p>
+              <div class="feature-icon-box">🤝</div>
+              <h4>Партнёрство, а не обслуживание</h4>
+              <p>Мы не просто агрегатор — мы работаем как твой продакт-тим. Помогаем с упаковкой, сертификацией, бренд-раскладкой. Ищем единомышленников, готовых строить это вместе с нами.</p>
             </div>
           </div>
-          <div style="margin-top:40px;display:flex;gap:16px;flex-wrap:wrap;">
-            <a href="#contact" class="btn-primary">Хочу в команду</a>
-            <a href="#contact" class="btn-secondary">Дать фидбек</a>
+
+          <div class="zuply-roles">
+            <h4>Кого ищу в команду прямо сейчас</h4>
+            <div class="role-list">
+              <div class="role-item">CTO / Lead Engineer — строить платформу с нуля</div>
+              <div class="role-item">Product Designer — UX, который не стыдно показать Apple</div>
+              <div class="role-item">Supply Chain Manager — с опытом работы с Китаем</div>
+              <div class="role-item">Growth / BizDev — первые клиенты и партнёры</div>
+              <div class="role-item">Frontend Engineer (React / Next.js)</div>
+              <div class="role-item">Backend Engineer (Node / Python)</div>
+            </div>
           </div>
+
+          <div style="display:flex;gap:16px;flex-wrap:wrap;">
+            <a href="#contact" class="btn-primary"><span>Хочу в команду →</span></a>
+            <a href="#contact" class="btn-secondary">Дать фидбек / вопросы</a>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1077,68 +1952,93 @@
   <!-- SKILLS -->
   <section id="skills" class="skills-section">
     <div class="section-inner">
-      <div class="section-eyebrow reveal">Экспертиза</div>
-      <h2 class="section-title reveal">Что я умею</h2>
+      <div class="section-header">
+        <div class="section-eyebrow reveal">Экспертиза</div>
+        <h2 class="section-title reveal">Что я умею<br><em>делать руками</em></h2>
+        <p class="section-desc reveal">Я не менеджер, который «координирует». Я founder, который сам пишет код, сам проводит интервью, сам нанимает и сам продаёт. Вот что конкретно.</p>
+      </div>
+
       <div class="skills-grid">
+
         <div class="skill-card reveal">
           <span class="skill-emoji">🧠</span>
           <h3>Machine Learning</h3>
-          <p>Разработка ML-моделей для трейдинга и рекомендательных систем. Реальный опыт внедрения в продуктах.</p>
+          <p>Разработка ML-моделей для трейдинга, NLP и рекомендательных систем. Не PoC-и для портфолио — реальные модели, которые крутились в проде и принимали решения с деньгами на кону.</p>
           <div class="skill-tags">
             <span class="skill-tag tag-blue">Python</span>
             <span class="skill-tag tag-blue">ML</span>
             <span class="skill-tag tag-blue">Recommender</span>
+            <span class="skill-tag tag-blue">NLP</span>
           </div>
         </div>
+
         <div class="skill-card reveal reveal-delay-1">
           <span class="skill-emoji">⚙️</span>
           <h3>Backend разработка</h3>
-          <p>Проектирование и реализация серверной архитектуры. От API до production-систем с модулями безопасности.</p>
+          <p>Проектирование и реализация серверной архитектуры. От REST API до production-систем с аутентификацией, модулями безопасности и интеграциями с внешними API (Тинькофф, платёжки, логистика).</p>
           <div class="skill-tags">
             <span class="skill-tag tag-green">REST API</span>
             <span class="skill-tag tag-green">Backend</span>
-            <span class="skill-tag tag-green">DB</span>
+            <span class="skill-tag tag-green">DB Design</span>
+            <span class="skill-tag tag-green">Auth</span>
           </div>
         </div>
+
         <div class="skill-card reveal reveal-delay-2">
           <span class="skill-emoji">📊</span>
           <h3>Трейдинг & Финтех</h3>
-          <p>Технический анализ, алготрейдинг, бинарные опционы, фондовый рынок. Опыт с реальными деньгами.</p>
+          <p>Технический анализ, алготрейдинг, бинарные опционы, фондовый рынок. Не теория из учебника — <strong style="color:var(--text)">опыт с реальными деньгами и реальными сливами</strong>, которые многому научили.</p>
           <div class="skill-tags">
             <span class="skill-tag tag-orange">Алготрейдинг</span>
-            <span class="skill-tag tag-orange">Фондовый рынок</span>
+            <span class="skill-tag tag-orange">Тех. анализ</span>
+            <span class="skill-tag tag-orange">Risk Mgmt</span>
           </div>
         </div>
+
         <div class="skill-card reveal reveal-delay-1">
           <span class="skill-emoji">🎯</span>
           <h3>Product Management</h3>
-          <p>CustDev-интервью, выявление болей, приоритизация фич, управление командой и дорожной картой продукта.</p>
+          <p>CustDev-интервью «по Фитцпатрику», выявление настоящих болей (не придуманных), приоритизация фич, roadmap, метрики, A/B. Строю продукты по принципу «сначала поговори — потом кодь».</p>
           <div class="skill-tags">
             <span class="skill-tag tag-purple">CustDev</span>
             <span class="skill-tag tag-purple">Roadmap</span>
             <span class="skill-tag tag-purple">Agile</span>
+            <span class="skill-tag tag-purple">Metrics</span>
           </div>
         </div>
+
         <div class="skill-card reveal reveal-delay-2">
           <span class="skill-emoji">👥</span>
           <h3>Team Lead & Найм</h3>
-          <p>Собирал команды с нуля: UI/UX, ML, Frontend, Backend. Выстраивал процессы, daily-созвоны, структуру работы.</p>
+          <p>Собирал команды с нуля под Coreator, Freerith и Zuply: UI/UX, ML, Frontend, Backend. Провожу собесы, выстраиваю daily-созвоны, спринты, документацию и культуру «сделал — сказал».</p>
           <div class="skill-tags">
             <span class="skill-tag tag-red">Leadership</span>
-            <span class="skill-tag tag-red">Team Building</span>
+            <span class="skill-tag tag-red">Hiring</span>
+            <span class="skill-tag tag-red">Processes</span>
           </div>
         </div>
+
         <div class="skill-card reveal reveal-delay-3">
           <span class="skill-emoji">🚀</span>
           <h3>Стартап-мышление</h3>
-          <p>6 запусков = 6 PMF-экспериментов. Умею быстро строить MVP, учиться на провалах и не опускать руки.</p>
+          <p>6 запусков = 6 дорогих PMF-экспериментов. Умею быстро лепить MVP из палок, учиться на провалах без истерик и держать удар. <strong style="color:var(--text)">Провал — это data, а не приговор.</strong></p>
           <div class="skill-tags">
             <span class="skill-tag tag-blue">MVP</span>
-            <span class="skill-tag tag-blue">0→1</span>
+            <span class="skill-tag tag-blue">0 → 1</span>
             <span class="skill-tag tag-blue">Resilience</span>
+            <span class="skill-tag tag-blue">Go-to-Market</span>
           </div>
         </div>
+
       </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES / QUOTE -->
+  <section class="principles-section">
+    <div class="section-inner">
+      <p class="big-quote reveal">«Успех — это не отсутствие провалов. Это способность <em>провалиться шесть раз</em> и на седьмой запустить то, что изменит правила.»</p>
+      <div class="quote-author reveal reveal-delay-1">Мой главный принцип, 2026</div>
     </div>
   </section>
 
@@ -1146,70 +2046,87 @@
   <section id="contact" class="contact-section">
     <div class="section-inner">
       <div class="contact-card reveal">
-        <h2>Давай строить<br>вместе 🚀</h2>
-        <p>Открыт к новым знакомствам, партнёрствам, инвестициям и интересным людям. Если тебя что-то зацепило — напиши.</p>
-        <div class="contact-links">
-          <a href="https://t.me/" class="contact-link">
-            <span class="contact-link-icon">✈️</span>
-            Telegram
-          </a>
-          <a href="mailto:" class="contact-link">
-            <span class="contact-link-icon">✉️</span>
-            Email
-          </a>
-          <a href="https://linkedin.com/" class="contact-link">
-            <span class="contact-link-icon">💼</span>
-            LinkedIn
-          </a>
-          <a href="#" class="contact-link">
-            <span class="contact-link-icon">🌐</span>
-            Zuply
-          </a>
+        <div class="contact-inner">
+          <h2>Давай строить<br><em>вместе</em> 🚀</h2>
+          <p>Открыт к знакомствам, партнёрствам, инвестициям и просто интересным людям. Хочешь в команду Zuply? Есть фидбек или вопросы? Просто хочется поговорить о продуктах, ML или жизни? Пиши — отвечаю быстро.</p>
+          <div class="contact-links">
+            <a href="https://t.me/" class="contact-link">
+              <span class="contact-link-icon">✈️</span> Telegram
+            </a>
+            <a href="mailto:" class="contact-link">
+              <span class="contact-link-icon">✉️</span> Email
+            </a>
+            <a href="https://linkedin.com/" class="contact-link">
+              <span class="contact-link-icon">💼</span> LinkedIn
+            </a>
+            <a href="#" class="contact-link">
+              <span class="contact-link-icon">🌐</span> Zuply
+            </a>
+          </div>
+          <div class="contact-availability">Доступен для команды и партнёрств</div>
         </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>© 2025 Никита Язвинский — <span>Founder & Builder</span> · Краснодар, Россия</p>
+    <div class="footer-inner">
+      <p>© 2026 <strong>Никита Язвинский</strong> · Founder &amp; Builder · Краснодар, Россия</p>
+      <p class="footer-right">Built with coffee &amp; ambition · V1.0</p>
+    </div>
   </footer>
 
   <script>
-    // CURSOR
+    // ============ CUSTOM CURSOR ============
     const cursor = document.getElementById('cursor');
     const follower = document.getElementById('follower');
     let mx = 0, my = 0, fx = 0, fy = 0;
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
-    });
-    const links = document.querySelectorAll('a, button');
-    links.forEach(el => {
-      el.addEventListener('mouseenter', () => follower.classList.add('hover'));
-      el.addEventListener('mouseleave', () => follower.classList.remove('hover'));
-    });
-    function animateFollower() {
-      fx += (mx - fx - 18) * 0.12;
-      fy += (my - fy - 18) * 0.12;
-      follower.style.transform = `translate(${fx}px, ${fy}px)`;
-      requestAnimationFrame(animateFollower);
-    }
-    animateFollower();
+    const hasHover = window.matchMedia('(hover: hover)').matches;
 
-    // SCROLL REVEAL
+    if (hasHover) {
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+      });
+      document.querySelectorAll('a, button, .about-pill, .feature-card, .skill-card, .timeline-content, .philo-card').forEach(el => {
+        el.addEventListener('mouseenter', () => follower.classList.add('hover'));
+        el.addEventListener('mouseleave', () => follower.classList.remove('hover'));
+      });
+      function animateFollower() {
+        fx += (mx - fx - 18) * 0.14;
+        fy += (my - fy - 18) * 0.14;
+        follower.style.transform = `translate(${fx}px, ${fy}px)`;
+        requestAnimationFrame(animateFollower);
+      }
+      animateFollower();
+    } else {
+      cursor.style.display = 'none';
+      follower.style.display = 'none';
+    }
+
+    // ============ SCROLL REVEAL ============
     const reveals = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12 });
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
     reveals.forEach(el => io.observe(el));
 
-    // COUNTER ANIMATION
+    // ============ COUNTERS ============
     function animateCounter(el, target, suffix = '') {
       let start = 0;
+      const duration = 1400;
+      const stepMs = 16;
+      const steps = duration / stepMs;
+      const inc = target / steps;
       const step = () => {
-        start += Math.ceil(target / 60);
+        start += inc;
         if (start >= target) { el.textContent = target + suffix; return; }
-        el.textContent = start + suffix;
+        el.textContent = Math.floor(start) + suffix;
         requestAnimationFrame(step);
       };
       step();
@@ -1218,16 +2135,27 @@
       entries.forEach(e => {
         if (e.isIntersecting) {
           const nums = e.target.querySelectorAll('.stat-number');
-          nums[0] && animateCounter(nums[0], 6);
-          nums[1] && (nums[1].textContent = '87%');
-          nums[2] && animateCounter(nums[2], 5, '+');
-          nums[3] && (nums[3].textContent = '∞');
+          if (nums[0]) animateCounter(nums[0], 6);
+          if (nums[1]) animateCounter(nums[1], 87, '%');
+          if (nums[2]) animateCounter(nums[2], 5, '+');
+          // nums[3] — infinity, leave as-is
           statsObserver.disconnect();
         }
       });
     }, { threshold: 0.5 });
     const statsBar = document.querySelector('.stats-inner');
     if (statsBar) statsObserver.observe(statsBar);
+
+    // ============ PARALLAX ORBS ============
+    const orbs = document.querySelectorAll('.floating-orb');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      orbs.forEach((orb, i) => {
+        const speed = (i + 1) * 0.05;
+        orb.style.transform = `translateY(${y * speed}px)`;
+      });
+    });
+
   </script>
 </body>
 </html>
