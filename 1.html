@@ -1678,6 +1678,7 @@ function randInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
 function randFloat(a,b){return a+Math.random()*(b-a);}
 
 // ── CONTROLS ──
+// ── CONTROLS ──
 function setupControls(){
   // Joystick
   const jz=document.getElementById('joystickZone');
@@ -1685,70 +1686,107 @@ function setupControls(){
   const ji=document.getElementById('joystickInner');
 
   function joystickStart(e){
-    const t=e.touches?e.touches[0]:e;
-    const rect=jo.getBoundingClientRect();
-    G.joystick={active:true,dx:0,dy:0,
-      startX:rect.left+rect.width/2,startY:rect.top+rect.height/2,id:t.identifier||0};
-    e.preventDefault();
-  }
-  function joystickMove(e){
-    if(!G.joystick.active)return;
-    let t=null;
-    if(e.touches){
-      for(let i=0;i<e.touches.length;i++)
-        if(e.touches[i].identifier===G.joystick.id){t=e.touches[i];break;}
-    }
-    if(!t&&!e.touches)t=e;
-    if(!t)return;
-    const dx=t.clientX-G.joystick.startX;
-    const dy=t.clientY-G.joystick.startY;
-    const d=Math.hypot(dx,dy);
-    const max=45;
-    const cx=d>max?dx/d*max:dx;
-    const cy=d>max?dy/d*max:dy;
-    ji.style.transform=`translate(${cx}px,${cy}px)`;
-    G.joystick.dx=cx/max;
-    G.joystick.dy=cy/max;
-    e.preventDefault();
-  }
-  function joystickEnd(){
-    G.joystick.active=false;G.joystick.dx=0;G.joystick.dy=0;
-    ji.style.transform='';
+    const t = e.changedTouches ? e.changedTouches[0] : e;
+    const rect = jo.getBoundingClientRect();
+    
+    G.joystick = {
+      active: true,
+      isTouch: true, // Добавлен флаг сенсора, чтобы клавиатура не перебивала управление
+      dx: 0,
+      dy: 0,
+      startX: rect.left + rect.width/2,
+      startY: rect.top + rect.height/2,
+      id: t.identifier ?? null
+    };
   }
 
-  jz.addEventListener('touchstart',joystickStart,{passive:false});
-  window.addEventListener('touchmove',joystickMove,{passive:false});
-  window.addEventListener('touchend',joystickEnd);
+  function joystickMove(e){
+    if(!G.joystick.active || !G.joystick.isTouch) return;
+    let t = null;
+    
+    // Ищем именно тот палец, который начал тянуть джойстик
+    if(e.touches){
+      for(let i=0; i<e.touches.length; i++) {
+        if(e.touches[i].identifier === G.joystick.id){ t = e.touches[i]; break; }
+      }
+    }
+    if(!t && !e.touches) t = e;
+    if(!t) return;
+
+    const dx = t.clientX - G.joystick.startX;
+    const dy = t.clientY - G.joystick.startY;
+    const d = Math.hypot(dx, dy);
+    const max = 45;
+    const cx = d > max ? (dx/d)*max : dx;
+    const cy = d > max ? (dy/d)*max : dy;
+
+    ji.style.transform = `translate(${cx}px, ${cy}px)`;
+    G.joystick.dx = cx/max;
+    G.joystick.dy = cy/max;
+    
+    if(e.cancelable) e.preventDefault(); // Предотвращаем скролл страницы при ходьбе
+  }
+
+  function joystickEnd(e){
+    // Если отпустили палец, проверяем - тот ли это палец, который был на джойстике
+    if(e && e.changedTouches && G.joystick.id !== null){
+      let isOurTouch = false;
+      for(let i=0; i<e.changedTouches.length; i++){
+        if(e.changedTouches[i].identifier === G.joystick.id) { isOurTouch = true; break; }
+      }
+      // Если убрали палец со скилла, а не с джойстика — игнорируем
+      if(!isOurTouch) return; 
+    }
+
+    G.joystick.active = false;
+    G.joystick.isTouch = false;
+    G.joystick.dx = 0;
+    G.joystick.dy = 0;
+    G.joystick.id = null;
+    ji.style.transform = '';
+  }
+
+  jz.addEventListener('touchstart', joystickStart, {passive: false});
+  window.addEventListener('touchmove', joystickMove, {passive: false});
+  window.addEventListener('touchend', joystickEnd);
+  window.addEventListener('touchcancel', joystickEnd); // Для надежности, если звонок перебил игру
 
   // Keyboard
   const keys={};
   window.addEventListener('keydown',e=>{
     keys[e.key.toLowerCase()]=true;
     if(e.key==='q')useSkill(0);
-    if(e.key==='w')useSkill(1);
+    if(e.key==='w' && !keys['arrowup'])useSkill(1); // Легкая правка для совместимости
     if(e.key==='e')useSkill(2);
     if(e.key==='i')toggleInventory();
-    e.preventDefault();
   });
   window.addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
 
   // Keyboard movement
   setInterval(()=>{
-    if(!G.running||G.paused)return;
-    let dx=0,dy=0;
-    if(keys['arrowleft']||keys['a'])dx=-1;
-    if(keys['arrowright']||keys['d'])dx=1;
-    if(keys['arrowup']||keys['w']&&!keys['w'])dy=-1; // w is skill
-    if(keys['arrowdown']||keys['s'])dy=1;
-    if(dx||dy){
-      G.joystick.active=true;G.joystick.dx=dx;G.joystick.dy=dy;
+    // Выходим, если игра на паузе ИЛИ если прямо сейчас используется сенсорный джойстик
+    if(!G.running || G.paused || G.joystick.isTouch) return; 
+
+    let kx=0, ky=0;
+    if(keys['arrowleft']||keys['a']) kx=-1;
+    if(keys['arrowright']||keys['d']) kx=1;
+    if(keys['arrowup']||keys['w']) ky=-1; // Исправлен баг, блокирующий движение вверх
+    if(keys['arrowdown']||keys['s']) ky=1;
+
+    if(kx||ky){
+      const len = Math.hypot(kx, ky);
+      G.joystick.active=true;
+      G.joystick.dx=kx/len; // Нормализуем скорость (чтобы по диагонали не бегал быстрее)
+      G.joystick.dy=ky/len;
     } else {
-      G.joystick.active=false;G.joystick.dx=0;G.joystick.dy=0;
+      G.joystick.active=false;
+      G.joystick.dx=0;
+      G.joystick.dy=0;
     }
   },16);
 
   // Click to dismiss tooltip
-  canvas.addEventListener('touchstart',hideTooltip);
+  canvas.addEventListener('touchstart',hideTooltip, {passive: true});
   canvas.addEventListener('click',hideTooltip);
 }
 
