@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zuply — Роадмап</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0D1B2A;
+    --navy2: #1A2F45;
+    --orange: #F4722B;
+    --orange-light: #F9A66C;
+    --white: #FFFFFF;
+    --light-bg: #F4F7FB;
+    --gray: #64748B;
+    --light-gray: #E2E8F0;
+    --dark-text: #1E293B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NAV DOTS */
+  .nav-dots {
+    position: fixed;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .nav-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+  }
+  .nav-dot.active { background: var(--orange); transform: scale(1.4); }
+
+  /* SLIDES */
+  .slide {
+    min-height: 100vh;
+    padding: 48px 24px 48px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .slide.visible { opacity: 1; transform: translateY(0); }
+
+  .slide-light { background: var(--light-bg); color: var(--dark-text); }
+  .slide-dark { background: var(--navy); color: var(--white); }
+
+  /* TYPOGRAPHY */
+  .slide-num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(38px, 10vw, 72px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--white);
+  }
+
+  h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(22px, 6vw, 36px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .slide-light h2 { color: var(--navy); }
+  .slide-dark h2 { color: var(--white); }
+
+  /* SLIDE 1 - TITLE */
+  #slide-1 {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  #slide-1::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    background: var(--orange);
+  }
+  .title-sub {
+    font-size: 18px;
+    color: var(--orange-light);
+    margin: 16px 0 8px;
+    font-weight: 500;
+  }
+  .title-meta {
+    font-size: 13px;
+    color: #7A9AB5;
+    margin-bottom: 32px;
+  }
+  .date-badge {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 20px;
+    border-radius: 4px;
+  }
+  .title-bg-text {
+    position: absolute;
+    right: -10px;
+    bottom: 20px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 120px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  /* CARDS */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    border-left: 4px solid var(--orange);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .card-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card-body {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  /* NUMBERED ROWS */
+  .num-rows { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+  .num-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--navy2);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .num-badge {
+    background: var(--orange);
+    color: white;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    width: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 0;
+  }
+  .num-text {
+    font-size: 13px;
+    color: #C8DDED;
+    padding: 14px 14px;
+    line-height: 1.5;
+  }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+  .col-box {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .col-header {
+    padding: 12px 14px;
+    font-weight: 700;
+    font-size: 12px;
+    color: white;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .col-header.navy { background: var(--navy); }
+  .col-header.orange { background: var(--orange); }
+  .col-items { padding: 12px 14px; }
+  .col-item {
+    font-size: 12px;
+    color: var(--dark-text);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--light-gray);
+    line-height: 1.4;
+    display: flex;
+    gap: 6px;
+  }
+  .col-item:last-child { border-bottom: none; }
+  .col-item::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+  .col-item.check::before { content: '✓'; color: #16A34A; }
+
+  /* BIG METRIC */
+  .big-metric {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 18px 16px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--orange);
+  }
+  .big-metric-text {
+    font-weight: 700;
+    font-size: 15px;
+    color: white;
+    line-height: 1.4;
+  }
+
+  /* GREEN/RED CARDS */
+  .verdict-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .verdict-card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .verdict-title {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .verdict-title.green { color: #16A34A; }
+  .verdict-title.red { color: #DC2626; }
+  .verdict-item {
+    font-size: 12px;
+    color: var(--dark-text);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--light-gray);
+    line-height: 1.4;
+  }
+  .verdict-item:last-child { border-bottom: none; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--navy2);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .step-num {
+    background: var(--orange);
+    color: white;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    width: 40px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+  }
+  .step-content { padding: 12px 12px; }
+  .step-title { font-weight: 700; font-size: 13px; color: white; margin-bottom: 3px; }
+  .step-desc { font-size: 11.5px; color: #9CB8D0; line-height: 1.4; }
+
+  /* ROADMAP */
+  .roadmap { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+  .roadmap-phase {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .phase-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .phase-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: white;
+  }
+  .phase-tag {
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+  .phase-items {
+    background: white;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .phase-item {
+    font-size: 12px;
+    color: var(--dark-text);
+    display: flex;
+    gap: 6px;
+    line-height: 1.4;
+  }
+  .phase-item::before { content: '•'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+
+  /* QUOTE */
+  .big-quote {
+    background: var(--orange);
+    border-radius: 10px;
+    padding: 24px 20px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  .big-quote-text {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: clamp(16px, 4.5vw, 22px);
+    color: white;
+    line-height: 1.3;
+  }
+
+  .principle-items { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+  .principle-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .p-num {
+    background: var(--orange);
+    color: white;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    margin-top: 2px;
+  }
+  .p-text { font-size: 13px; color: #C8DDED; line-height: 1.5; }
+
+  /* SUBTITLE */
+  .subtitle {
+    font-size: 14px;
+    color: var(--orange-light);
+    margin-bottom: 16px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .slide-light .subtitle { color: var(--gray); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- SLIDE 1: TITLE -->
+<section class="slide slide-dark" id="slide-1">
+  <div class="slide-num">Zuply / Апрель 2026</div>
+  <h1>Zuply</h1>
+  <p class="title-sub">Что делаем сейчас и куда идём</p>
+  <p class="title-meta">Презентация для сооснователя</p>
+  <span class="date-badge">Апрель 2026</span>
+  <div class="title-bg-text">Z</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SLIDE 2: WHERE WE ARE -->
+<section class="slide slide-light" id="slide-2">
+  <div class="slide-num">01 / Контекст</div>
+  <h2>Где мы сейчас</h2>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-title">✅ Продукт</div>
+      <div class="card-body">IT-платформа для производства физических товаров в Китае и доставки в Россию</div>
+    </div>
+    <div class="card">
+      <div class="card-title">👥 Команда</div>
+      <div class="card-body">Никита (CEO/CTO, Россия) + Степа (COO, Нанкин, Китай)</div>
+    </div>
+    <div class="card">
+      <div class="card-title">⚙️ Процесс</div>
+      <div class="card-body">15-шаговый цикл: 3D-модель → DFM → прототип → партия → доставка</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🎯 ЦА для MVP</div>
+      <div class="card-body">Конструкторские бюро и студии промышленного дизайна</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SLIDE 3: PROBLEM -->
+<section class="slide slide-dark" id="slide-3">
+  <div class="slide-num">02 / Проблема</div>
+  <h2>Главная проблема</h2>
+  <p class="subtitle">Мы не знаем — есть ли реальная боль за которую готовы платить</p>
+  <div class="num-rows">
+    <div class="num-row">
+      <div class="num-badge">01</div>
+      <div class="num-text">Гипотеза: КБ хотят производить в Китае, но не могут из-за качества и коммуникации</div>
+    </div>
+    <div class="num-row">
+      <div class="num-badge">02</div>
+      <div class="num-text">Это только предположение — пока не подтверждённый факт реальными людьми</div>
+    </div>
+    <div class="num-row">
+      <div class="num-badge">03</div>
+      <div class="num-text">Без проверки — мы строим продукт который никому не нужен</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SLIDE 4: CUST DEV -->
+<section class="slide slide-light" id="slide-4">
+  <div class="slide-num">03 / Шаг первый</div>
+  <h2>Cust-Dev — 2 недели</h2>
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-header navy">Что делаем</div>
+      <div class="col-items">
+        <div class="col-item">15 интервью с директорами КБ</div>
+        <div class="col-item">Спрашиваем о прошлом — не питчим</div>
+        <div class="col-item">Ищем через 2ГИС, Telegram, hh.ru</div>
+        <div class="col-item">Срок: 2 недели</div>
+      </div>
+    </div>
+    <div class="col-box">
+      <div class="col-header orange">Что узнаем</div>
+      <div class="col-items">
+        <div class="col-item check">Хотят ли КБ производить в Китае</div>
+        <div class="col-item check">Что останавливает — страх, качество?</div>
+        <div class="col-item check">Платили ли уже за решение</div>
+        <div class="col-item check">Кто принимает решение о подрядчике</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SLIDE 5: SUCCESS CRITERIA -->
+<section class="slide slide-light" id="slide-5">
+  <div class="slide-num">04 / Критерии успеха</div>
+  <h2>Как понять что cust-dev успешен</h2>
+  <div class="big-metric">
+    <div class="big-metric-text">10 из 15 человек уже тратили деньги или время на решение этой проблемы</div>
+  </div>
+  <div class="verdict-grid">
+    <div class="verdict-card">
+      <div class="verdict-title green">🟢 Боль подтверждена</div>
+      <div class="verdict-item">Жалуются без наводящих вопросов</div>
+      <div class="verdict-item">Называют конкретные потери в деньгах</div>
+      <div class="verdict-item">Спрашивают «когда запустите?»</div>
+      <div class="verdict-item">Дают контакты других КБ</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-title red">🔴 Боль не подтверждена</div>
+      <div class="verdict-item">«Нам всё устраивает»</div>
+      <div class="verdict-item">Не могут назвать реальный кейс</div>
+      <div class="verdict-item">Говорят «интересно» без деталей</div>
+      <div class="verdict-item">Никто не платил за решение раньше</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SLIDE 6: FIRST DEAL -->
+<section class="slide slide-dark" id="slide-6">
+  <div class="slide-num">05 / Шаг второй</div>
+  <h2>Первая сделка руками</h2>
+  <p class="subtitle">После подтверждения боли — один клиент, весь цикл вручную</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Клиент из cust-dev</div>
+        <div class="step-desc">Берём того кто сказал «интересно» и дал конкретную задачу</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">3D-модель → завод</div>
+        <div class="step-desc">Степа отправляет на завод. Только простые товары — контроль визуально</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">DFM анализ</div>
+        <div class="step-desc">Завод делает за 24 часа. Мы делаем отчёт для клиента</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Прототип → партия</div>
+        <div class="step-desc">Завод снимает видео каждого этапа. Контроль по чеклисту</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Доставка в Россию</div>
+        <div class="step-desc">Карго-компания с белыми документами. Клиент принимает — мы получаем оплату</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SLIDE 7: ROADMAP -->
+<section class="slide slide-light" id="slide-7">
+  <div class="slide-num">06 / Роадмап</div>
+  <h2>План действий</h2>
+  <div class="roadmap">
+    <div class="roadmap-phase">
+      <div class="phase-header" style="background:#F4722B">
+        <div class="phase-title">Cust-Dev</div>
+        <div class="phase-tag">Неделя 1–2</div>
+      </div>
+      <div class="phase-items">
+        <div class="phase-item">15 интервью с конструкторскими бюро</div>
+        <div class="phase-item">Подтвердить или опровергнуть гипотезу</div>
+        <div class="phase-item">Найти людей с реальной болью</div>
+      </div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="phase-header" style="background:#0891B2">
+        <div class="phase-title">Подготовка</div>
+        <div class="phase-tag">Неделя 3–4</div>
+      </div>
+      <div class="phase-items">
+        <div class="phase-item">Найти юриста ВЭД (15–30к руб.)</div>
+        <div class="phase-item">Степа выбирает карго-компанию</div>
+        <div class="phase-item">Лендинг на Tilda + Airtable-админка</div>
+      </div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="phase-header" style="background:#16A34A">
+        <div class="phase-title">Первая сделка</div>
+        <div class="phase-tag">Месяц 2</div>
+      </div>
+      <div class="phase-items">
+        <div class="phase-item">Один клиент — весь цикл руками</div>
+        <div class="phase-item">Только простые товары</div>
+        <div class="phase-item">Учимся на реальном процессе</div>
+      </div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="phase-header" style="background:#0D1B2A">
+        <div class="phase-title">Рост</div>
+        <div class="phase-tag">Месяц 3+</div>
+      </div>
+      <div class="phase-items">
+        <div class="phase-item">3 успешные сделки = масштабирование</div>
+        <div class="phase-item">Автоматизация и IT-платформа</div>
+        <div class="phase-item">Активное привлечение клиентов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SLIDE 8: PRINCIPLE -->
+<section class="slide slide-dark" id="slide-8">
+  <div class="slide-num">07 / Главный принцип</div>
+  <h2>Главный принцип</h2>
+  <div class="big-quote">
+    <div class="big-quote-text">Не строй платформу — сначала сделай 3 сделки руками</div>
+  </div>
+  <div class="principle-items">
+    <div class="principle-item">
+      <div class="p-num">1</div>
+      <div class="p-text">Cust-dev подтверждает проблему — но не то, что мы умеем её решать</div>
+    </div>
+    <div class="principle-item">
+      <div class="p-num">2</div>
+      <div class="p-text">Между «боль существует» и «мы закрываем её лучше других» — огромная разница</div>
+    </div>
+    <div class="principle-item">
+      <div class="p-num">3</div>
+      <div class="p-text">3 ручные сделки покажут что автоматизировать, кого нанимать и как продавать</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const navDots = document.getElementById('navDots');
+
+  // Create nav dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.setAttribute('aria-label', 'Слайд ' + (i+1));
+    dot.addEventListener('click', () => {
+      slides[i].scrollIntoView({ behavior: 'smooth' });
+    });
+    navDots.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.nav-dot');
+
+  // Intersection observer for animations + active dot
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        const idx = Array.from(slides).indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { threshold: 0.3 });
+
+  slides.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
